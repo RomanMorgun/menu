@@ -1,0 +1,10 @@
+<app-header [name] = "appName" (searchValue)="searchCafe($event)"></app-header>
+
+<ion-content>
+  <div class="content">
+    <app-cafe-item *ngFor="let cafe of cafes" [cafe] = cafe></app-cafe-item>
+  </div>
+
+
+
+</ion-content>

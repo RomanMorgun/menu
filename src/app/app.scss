@@ -4,3 +4,61 @@
 // styles are for the entire app and not just one component. Additionally, this 
 // file can hold Sass mixins, functions, and placeholder classes to be imported 
 // and used throughout the application.
+
+@import "../theme/variables";
+
+p {
+  margin: 0;
+  padding: 0;
+}
+
+.content {
+  padding: 16px 0;
+}
+
+ion-icon {
+  color: $lightGrey;
+}
+
+.headerCtn {
+  box-sizing: border-box;
+  //padding: 16px;
+  padding: 0 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  .nameCtn {
+    text-transform: uppercase;
+    font-size: $fontSize16;
+    font-weight: 600;
+    color: $lightGrey;
+  }
+  .icons {
+    font-size: $fontSize22;
+    padding-top: 4px;
+    ion-icon {
+      padding: 0 6px;
+      //color: $lightGrey;
+      &:last-child {
+        padding-right: 0;
+      }
+    }
+  }
+
+}
+.appHeader {
+  .searchbar-input.sc-ion-searchbar-md {
+    line-height: 20px !important;
+    padding-inline-start: 35px !important;
+    padding-inline-end: 15px !important;
+
+  }
+  .searchbar-search-icon.sc-ion-searchbar-md {
+    left: 6px !important;
+    top: 6px !important;
+    color: $lightGrey !important;
+  }
+  .searchbar-clear-button.sc-ion-searchbar-md {
+    color: $lightGrey !important;
+  }
+}

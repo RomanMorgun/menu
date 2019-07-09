@@ -1,0 +1,24 @@
+<div class="appHeader">
+  <ion-header>
+    <ion-toolbar>
+      <div class="headerCtn">
+        <div class="nameCtn" *ngIf="!nameHide">
+          <span>{{name}}</span>
+        </div>
+
+        <div class="headerSearch" *ngIf="nameHide">
+          <ion-searchbar id="homeSearch" (input)="searchCafe($event)" (ionClear)="clearClick($event)"></ion-searchbar>
+        </div>
+
+        <div class="icons">
+          <ion-icon name="search" (click)="searchClick()"></ion-icon>
+          <ion-icon name="pin" (click)="locationClick()"></ion-icon>
+          <ion-icon name="cart" (click)="cartClick()"></ion-icon>
+        </div>
+      </div>
+
+
+    </ion-toolbar>
+
+  </ion-header>
+</div>
