@@ -8,7 +8,14 @@ export class DishService {
   private dishes: Dish[];
 
   getDishes() {
-    return this.dishes.slice();
+    const dishArray = [];
+    dishArray.push(new Dish());
+    return dishArray;
+    // console.log(this.dishes);
+    // return this.dishes.slice();
+  }
+  setDishes(dishes: Dish[]) {
+    this.dishes = dishes;
   }
 }
 

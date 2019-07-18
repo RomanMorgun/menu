@@ -3,10 +3,10 @@ import { Dish } from './dish.model';
 export class Order {
 
   constructor(
-    private id: number,
-    private cafeId: number,
+    public cafeId: number,
     public dishes: Dish[],
-    public totalPrice: number
+    public totalPrice: number,
+    public id?: number,
   ) {}
 
 }

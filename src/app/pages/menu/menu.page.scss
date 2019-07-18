@@ -1,0 +1,41 @@
+.menuCtn {
+  .categoriesCtn {
+    display: flex;
+    flex-wrap: wrap;
+    .categoryItem {
+
+      &--name {
+        padding: 5px 12px 10px 0;
+      }
+    }
+  }
+
+  .dishesCtn {
+    margin-top: 25px;
+  }
+}
+
+ion-header {
+  display: flex;
+ }
+
+.activeCategory {
+  border-bottom: 2px solid #358fff;
+  transition: 0.1s;
+  color: #439dbb;
+}
+.testMain {
+  min-height: 1px;
+  transition: 0.5s;
+}
+
+.test {
+  height: 0;
+  transition: 0.5s;
+}
+
+.testOpen {
+  height: 20px;
+  background: grey;
+  transition: 0.5s;
+}

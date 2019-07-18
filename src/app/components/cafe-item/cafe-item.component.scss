@@ -1,36 +1,43 @@
 @import "../../../theme/variables";
 
 .cafeItem {
-  padding: 10px 16px;
-  border-top: 1px solid #d1d1d1;
+  //padding: 10px 16px;
+  padding: 0 16px 10px 16px;
+  //border-top: 1px solid #d1d1d1;
   border-bottom: 1px solid #d1d1d1;
   min-height: 100px;
   display: flex;
-  margin-bottom: 10px;
+  justify-content: space-between;
+  margin-bottom: 14px;
   .cafeLogo {
+    display: flex;
+    align-items: center;
     max-width: 25%;
-    max-height: 110px;
+    min-height: 100%;
     margin-right: 15px;
     img {
-      height: 100%;
+      max-height: 100px;
     }
   }
 
   .cafeData {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    color: $lightGrey;
+    justify-content: center;
+    //color: $lightGrey;
     min-width: 55%;
     &__item {
       //color: $lightGrey;
       &--staticText {
+
         //color: #494949;
       }
       &--name {
+        //font-family: RobotoMedium, sans-serif;
+        //font-size: $fontSize18;
         //color: $lightDark;
       }
-      margin: 3px 0;
+      margin: 4px 0;
       &:first-child {
         margin-top: 0;
       }
@@ -41,7 +48,7 @@
   }
 
   .cafeLocation {
-    width: 20%;
+    width: 15%;
     min-height: 100%;
     display: flex;
     justify-content: center;

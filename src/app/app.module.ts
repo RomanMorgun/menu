@@ -23,6 +23,10 @@ import { SharedModule } from './shared/shared.module';
 
 // Service
 import { CafeService } from './shared/services/cafe.service';
+import {MenuService} from './shared/services/menu.service';
+import {CartService} from './shared/services/cart.service';
+import {DishService} from './shared/services/dish.service';
+import { CategoryService } from './shared/services/category.service';
 
 
 
@@ -46,7 +50,11 @@ import { CafeService } from './shared/services/cafe.service';
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    CafeService
+    CafeService,
+    MenuService,
+    CartService,
+    DishService,
+    CategoryService
   ],
   bootstrap: [AppComponent]
 })

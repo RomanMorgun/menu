@@ -1,27 +1,27 @@
 <div class="cafeItem">
   <!--routerLink="/menu"-->
   <div class="cafeLogo"  (click)="selectCafe()">
-    <img [src]="cafe.logotype" alt="Cafe Logotype">
+    <img [src]="cafe.logo" alt="Cafe Logotype">
   </div>
   <div class="cafeData">
     <div class="cafeData__item">
       <!--<span class="cafeData__item&#45;&#45;staticText">Назва: </span>-->
-      <span class="cafeData__item--name">{{cafe.name}}</span>
+      <span class="cafeData__item--name robotoMeduimClass20">{{cafe.name}}</span>
     </div>
     <div class="cafeData__item">
-      <span class="cafeData__item--staticText">Адреса: </span>
-      <span class="cafeData__item--address">{{cafe.address}}</span>
+      <span class="cafeData__item--staticText robotoRegGrey">Адреса: </span>
+      <span class="cafeData__item--address robotoRegGrey">{{cafe.address}}</span>
     </div>
+    <!--<div class="cafeData__item">-->
+      <!--<span class="cafeData__item&#45;&#45;staticText">Номер телефону: </span>-->
+      <!--<span class="cafeData__item&#45;&#45;telephone">{{cafe.telephone}}</span>-->
+    <!--</div>-->
     <div class="cafeData__item">
-      <span class="cafeData__item--staticText">Номер телефону: </span>
-      <span class="cafeData__item--telephone">{{cafe.telephone}}</span>
-    </div>
-    <div class="cafeData__item">
-      <span class="cafeData__item--staticText">Часи роботи: </span>
-      <span class="cafeData__item--timeWork">{{cafe.address}}</span>
+      <span class="cafeData__item--staticText robotoRegGrey">Часи роботи: </span>
+      <span class="cafeData__item--timeWork robotoRegGrey">{{cafe.address}}</span>
     </div>
   </div>
-  <div class="cafeLocation">
+  <div class="cafeLocation robotoRegGrey">
     <ion-icon name="pin"></ion-icon>
   </div>
 </div>

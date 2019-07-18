@@ -1,6 +1,10 @@
 <div class="appHeader">
   <ion-header>
+
     <ion-toolbar>
+      <!--<ion-buttons slot="start" *ngIf="currentUrl !== previousUrl">-->
+        <!--<ion-back-button defaultHref="{{previousUrl}}"></ion-back-button>-->
+      <!--</ion-buttons>-->
       <div class="headerCtn">
         <div class="nameCtn" *ngIf="!nameHide">
           <span>{{name}}</span>
@@ -11,14 +15,20 @@
         </div>
 
         <div class="icons">
-          <ion-icon name="search" (click)="searchClick()"></ion-icon>
-          <ion-icon name="pin" (click)="locationClick()"></ion-icon>
-          <ion-icon name="cart" (click)="cartClick()"></ion-icon>
+          <ion-icon class="icons__item" name="search" (click)="searchClick()"></ion-icon>
+          <ion-icon class="icons__item" name="pin" (click)="locationClick()"></ion-icon>
+          <ion-icon class="icons__item" name="cart" (click)="cartClick()"></ion-icon>
         </div>
       </div>
 
 
     </ion-toolbar>
+
+    <div class="slideMenu" *ngIf="categories">
+      <div class="slideMenu__item" *ngFor="let cat of categories" (click)="selectCategory(cat.id)" [ngClass]="{activeCategory: cat.id === activeCatId}">
+        <span>{{cat.name}}</span>
+      </div>
+    </div>
 
   </ion-header>
 </div>

@@ -1,0 +1,129 @@
+<ion-content no-padding>
+<div class="dishesContent">
+  <ion-list *ngFor="let dish of currentDishes; let i = index" lines="none"  no-padding>
+    <!--<ion-item lines="full">-->
+    <div class="listItem">
+      <div class="dishCtn">
+        <div class="dishImage" *ngIf="dish.logo !== ''">
+          <img [src]="dish.logo" alt="">
+        </div>
+        <div class="dishName">
+          <div class="dishName__name robotoMeduimClass20">
+
+            <span>{{dish.name}}</span>
+          </div>
+          <div class="dishName__price robotoMeduimClass20">
+            <span>{{dish.price}}</span>
+            <span> грн</span>
+          </div>
+        </div>
+        <div class="dishDescription robotoRegGrey16">
+          <!--<span>{{dish.description}}</span>-->
+          <span>{{dish.description}}</span>
+        </div>
+        <div class="IngredientsAndButton">
+          <div class="showIngred robotoRegularClass15">
+            <span (click)="showDetailInfo(dish.id)">Більш детально: </span>
+          </div>
+          <div class="changeAmount">
+            <ion-button size="small" class="removeBtn robotoRegGrey" (click)="addToCart(dish, dish.id, 'remove')" *ngIf="dish.count > 0">
+              <span>-</span>
+            </ion-button>
+            <span class="changeAmount__counter robotoRegGrey" *ngIf="dish.count > 0">{{dish.count}}</span>
+            <ion-button size="small" class="addBtn robotoRegGrey" (click)="addToCart(dish, dish.id, 'add')">
+              <span>+</span>
+            </ion-button>
+          </div>
+          <!--<div class="addToCart">-->
+            <!--<ion-button class="robotoRegularClass15" size="small" [disabled]="dish.count === 0">Додати</ion-button>-->
+          <!--</div>-->
+        </div>
+        <div class="moreInfo" [ngClass]="{'showInfo': dish.open}">
+          <div class="ingredients robotoMeduimClass15">
+            <div class="ingredientsItem" *ngFor="let ingredient of dish.ingredients; let i = index">
+              <ion-checkbox [(ngModel)]="ingredient.included" (ionChange)="changeIngridient($event)"></ion-checkbox>
+              <ion-label>
+                <span>{{ingredient.name }} </span>
+                <span>{{ingredient.price }}</span>
+                <span>грн</span>
+              </ion-label>
+
+            </div>
+          </div>
+        </div>
+
+
+
+
+
+      </div>
+      <!--<div class="dishCtn">-->
+
+        <!--<div class="dataCtn">-->
+          <!--<div class="nameAndPrice">-->
+            <!--<div class="nameAndPrice__name">-->
+              <!--<span>{{dish.name}}</span>-->
+            <!--</div>-->
+
+            <!--<div class="ingredientsAndCart__toCart">-->
+              <!--<ion-button class="toCartBtn toCartBtn&#45;&#45;delete" (click)="changeCountValue(dish.id, 'remove')" *ngIf="dish.count > 0">-->
+                <!--<span>-</span>-->
+              <!--</ion-button>-->
+              <!--<span class="dishCount" *ngIf="dish.count > 0">{{dish.count}}</span>-->
+              <!--<ion-button class="toCartBtn toCartBtn&#45;&#45;add" (click)="changeCountValue(dish.id, 'add')">-->
+                <!--<span>+</span>-->
+              <!--</ion-button>-->
+
+              <!--<div class="price">-->
+                <!--<span>{{dish.price}}</span>-->
+                <!--<span> грн</span>-->
+              <!--</div>-->
+            <!--</div>-->
+
+
+
+          <!--</div>-->
+          <!--<div class="ingredientsAndCart">-->
+            <!--<div class="ingredientsAndCart__ingred">-->
+              <!--<span>Показати детальний опис та інгрідієнти: </span>-->
+            <!--</div>-->
+            <!--<div class="addToCart">-->
+              <!--<ion-button size="small">Замовити</ion-button>-->
+            <!--</div>-->
+            <!--&lt;!&ndash;<div class="ingredientsAndCart__toCart">&ndash;&gt;-->
+              <!--&lt;!&ndash;<ion-button class="toCartBtn toCartBtn&#45;&#45;delete" (click)="changeCountValue(dish.id, 'remove')" *ngIf="dish.count > 0">&ndash;&gt;-->
+                <!--&lt;!&ndash;<span>-</span>&ndash;&gt;-->
+              <!--&lt;!&ndash;</ion-button>&ndash;&gt;-->
+              <!--&lt;!&ndash;<span class="dishCount">{{dish.count}}</span>&ndash;&gt;-->
+              <!--&lt;!&ndash;<ion-button class="toCartBtn toCartBtn&#45;&#45;add" (click)="changeCountValue(dish.id, 'add')">&ndash;&gt;-->
+                <!--&lt;!&ndash;<span>+</span>&ndash;&gt;-->
+              <!--&lt;!&ndash;</ion-button>&ndash;&gt;-->
+
+              <!--&lt;!&ndash;<div class="price" (click)="addPriceAmount(dish.id)">&ndash;&gt;-->
+                <!--&lt;!&ndash;<span>Ціна: </span>&ndash;&gt;-->
+                <!--&lt;!&ndash;<span>{{dish.price}}</span>&ndash;&gt;-->
+              <!--&lt;!&ndash;</div>&ndash;&gt;-->
+            <!--&lt;!&ndash;</div>&ndash;&gt;-->
+
+          <!--</div>-->
+        <!--</div>-->
+      <!--</div>-->
+    </div>
+  </ion-list>
+</div>
+
+
+  <!--<ion-list class="accordion-list" lines="none" detail="false" no-padding>-->
+    <!--<ion-item tappable (click)="toggleSection(i)" >-->
+      <!--<app-dish-item *ngFor="let dish of currentDishes" [dish]="dish"></app-dish-item>-->
+      <!--&lt;!&ndash;<div class="test" [ngClass]="{'testOpen':dish.open}">&ndash;&gt;-->
+        <!--&lt;!&ndash;TESt&ndash;&gt;-->
+      <!--&lt;!&ndash;</div>&ndash;&gt;-->
+    <!--</ion-item>-->
+  <!--</ion-list>-->
+
+</ion-content>
+
+<!--<p>-->
+  <!--DISH LIST-->
+<!--</p>-->

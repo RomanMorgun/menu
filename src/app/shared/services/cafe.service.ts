@@ -32,7 +32,8 @@ export class CafeService {
     )
   ];
 
-  setCafes(cafes) {
+  setCafes(cafes: Cafe[]) {
+    this.cafes = cafes;
   }
 
 

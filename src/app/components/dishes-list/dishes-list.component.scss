@@ -1,0 +1,271 @@
+@import "../../../theme/variables";
+
+.dishesContent {
+  position: relative;
+  width: 100%;
+  padding: 16px 0;
+  ion-item {
+    margin-bottom: 8px;
+  }
+  ion-list:first-child {
+    .listItem {
+      margin-top: 0;
+    }
+  }
+  .listItem {
+    box-sizing: border-box;
+    padding: 0 16px;
+    //border-bottom: 1px solid #d7d7d7;
+    margin-top: 35px;
+  }
+
+
+
+  .dishCtn {
+    width: 100%;
+  }
+  .dishImage {
+    width: 100%;
+
+    margin-bottom: 10px;
+    img {
+      width: 100%;
+      max-height: 400px;
+      margin: 0 auto;
+    }
+
+  }
+
+  .dishName {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+  }
+
+  .dishDescription {
+    max-width: 65%;
+    //white-space: nowrap;
+    //overflow: hidden;
+    //text-overflow: ellipsis;
+
+  }
+
+  .IngredientsAndButton {
+    margin-bottom: 10px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    .showIngred {
+      display: flex;
+      span {
+        color: black;
+        align-self: flex-end;
+      }
+      ion-icon {
+        font-size: 22px;
+        color: #474747;
+      }
+    }
+    .changeAmount {
+      min-width: 100px;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      &__counter {
+        margin: 0 8px;
+      }
+      ion-button {
+        font-size: $fontSize16;
+        width: 40px;
+        height: 40px;
+        --background: transparent;
+        --border-color: #686E65;
+        --border-radius: 50%;
+        --border-width: 1px;
+        --color: black;
+
+        margin-bottom: 0 !important;
+        margin-top: 0 !important;
+        span {
+          font-size: $fontSize18;
+        }
+      }
+      .addBtn {
+        --color-activated: #46ac96;
+      }
+      .removeBtn {
+        --color-activated: #FE685C;
+      }
+    }
+    .addToCart {
+      display: flex;
+      align-items: flex-end;
+      ion-button {
+        --background: $greenColor;
+        margin-bottom: 0 !important;
+        margin-right: 0 !important;
+      }
+    }
+  }
+
+  .moreInfo {
+    margin-top: 15px;
+    width: 100%;
+    max-height: 0;
+    transition: max-height 0.5s cubic-bezier(0, 1, 0, 1);
+    //transition-duration: 0.5s;
+  }
+
+  .showInfo {
+    max-height: 1000px;
+    transition: max-height 1s ease-in-out;
+  }
+
+  .description {
+    box-sizing: border-box;
+    padding-bottom: 10px;
+  }
+
+  .ingredients {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+
+  }
+  .ingredientsItem {
+    display: flex;
+    align-items: center;
+    width: 50%;
+    padding-right: 10px;
+    margin-bottom: 5px;
+    ion-label {
+      margin-left: 10px;
+    }
+    ion-checkbox {
+      --background-checked: #46AC96;
+      --border-color-checked: #46AC96;
+    }
+  }
+
+
+
+  //.ingredientsAndCart__toCart {
+  //  ion-button {
+  //    font-size: $fontSize16;
+  //    width: 40px;
+  //    height: 40px;
+  //    --background: transparent;
+  //    --border-color: #686E65;
+  //    --border-radius: 50%;
+  //    --border-width: 1px;
+  //    --color: black;
+  //    --color-activated: green;
+  //    margin-bottom: 0 !important;
+  //    margin-top: 0 !important;
+  //    span {
+  //      font-size: $fontSize18;
+  //    }
+  //  }
+  //  .price {
+  //    margin-left: 10px;
+  //  }
+  //}
+  //
+  //.dishCtn {
+  //  display: flex;
+  //  width: 100%;
+  //  padding: 8px 0 8px 0;
+  //  &:first-child {
+  //    padding-top: 0;
+  //  }
+  //  .imgCtn {
+  //    min-width: 60px;
+  //    height: 60px;
+  //    img {
+  //      border: 1px solid #686E65;
+  //      //-webkit-box-shadow: 0  16px 0 rgba(104,110,101,1);
+  //      //-moz-box-shadow: 0 0 16px 0 rgba(104,110,101,1);
+  //      //box-shadow: 0 0 5px 0 rgba(104,110,101,1);
+  //      border-radius: 8px;
+  //      width: 60px;
+  //      height: 60px;
+  //    }
+  //  }
+  //
+  //  .dataCtn {
+  //    width: 99%;
+  //    display: flex;
+  //
+  //    flex-direction: column;
+  //    .nameAndPrice {
+  //      display: flex;
+  //      justify-content: space-between;
+  //      &__name {
+  //
+  //      }
+  //      &__price {
+  //        margin-right: 2px;
+  //      }
+  //      .addToCart {
+  //        width: 80px;
+  //        margin-right: 25px;
+  //        ion-button {
+  //        }
+  //
+  //      }
+  //    }
+  //  }
+  //  .ingredientsAndCart {
+  //    margin-top: 5px;
+  //    display: flex;
+  //    justify-content: space-between;
+  //    width: 100%;
+  //
+  //    &__ingred, &__toCart {
+  //      width: 50%;
+  //    }
+  //    &__ingred {
+  //      display: flex;
+  //      align-items: flex-end;
+  //
+  //    }
+  //
+  //    &__toCart {
+  //      display: flex;
+  //      justify-content: flex-end;
+  //      align-items: center;
+  //      .dishCount {
+  //        padding: 0 8px;
+  //      }
+  //
+  //      .toCartBtn--delete {
+  //        --color-activated: red;
+  //      }
+  //
+  //      ion-button {
+  //        font-size: $fontSize16;
+  //        width: 40px;
+  //        height: 40px;
+  //        --background: transparent;
+  //        --border-color: #686E65;
+  //        --border-radius: 50%;
+  //        --border-width: 1px;
+  //        --color: black;
+  //        --color-activated: green;
+  //        margin-bottom: 0 !important;
+  //        margin-top: 0 !important;
+  //        span {
+  //          font-size: $fontSize18;
+  //        }
+  //      }
+  //    }
+  //
+  //
+  //
+  //
+  //
+  //  }
+  //}
+
+}
+

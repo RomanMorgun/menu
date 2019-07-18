@@ -7,6 +7,36 @@
 
 @import "../theme/variables";
 
+
+@font-face {
+  font-family: RobotoRegular;
+  src: url(../assets/fonts/Roboto-Regular.ttf);
+}
+@font-face {
+  font-family: RobotoItalic;
+  src: url(../assets/fonts/Roboto-Italic.ttf);
+}
+
+@font-face {
+  font-family: RobotoBold;
+  src: url(../assets/fonts/Roboto-Bold.ttf);
+}
+
+@font-face {
+  font-family: RobotoBoldItalic;
+  src: url(../assets/fonts/Roboto-BoldItalic.ttf);
+}
+
+@font-face {
+  font-family: RobotoMedium;
+  src: url(../assets/fonts/Roboto-Medium.ttf);
+}
+
+body {
+  font-family: RobotoRegular, sans-serif;
+  font-size: $fontSize18;
+}
+
 p {
   margin: 0;
   padding: 0;
@@ -16,8 +46,12 @@ p {
   padding: 16px 0;
 }
 
+.paddingCtn {
+  padding: 16px 16px;
+}
+
 ion-icon {
-  color: $lightGrey;
+  //color: $lightGrey;
 }
 
 .headerCtn {
@@ -29,16 +63,16 @@ ion-icon {
   align-items: center;
   .nameCtn {
     text-transform: uppercase;
-    font-size: $fontSize16;
+    font-size: $fontSize18;
     font-weight: 600;
-    color: $lightGrey;
+    //color: $lightGrey;
   }
   .icons {
     font-size: $fontSize22;
     padding-top: 4px;
     ion-icon {
-      padding: 0 6px;
-      //color: $lightGrey;
+      color: black;
+      padding: 0 11px;
       &:last-child {
         padding-right: 0;
       }
@@ -56,9 +90,57 @@ ion-icon {
   .searchbar-search-icon.sc-ion-searchbar-md {
     left: 6px !important;
     top: 6px !important;
-    color: $lightGrey !important;
+    //color: $lightGrey !important;
   }
   .searchbar-clear-button.sc-ion-searchbar-md {
-    color: $lightGrey !important;
+    //color: $lightGrey !important;
   }
 }
+
+.robotoMeduimClass20 {
+  font-family: RobotoMedium, sans-serif;
+  font-size: $fontSize20;
+}
+
+.robotoMeduimClass18 {
+  font-family: RobotoMedium, sans-serif;
+  font-size: $fontSize18;
+}
+
+.robotoMeduimClass15 {
+  font-family: RobotoMedium, sans-serif;
+  font-size: $fontSize15;
+  line-height: 1.5;
+}
+
+.robotoRegularClass18 {
+  font-family: RobotoRegular, sans-serif;
+  font-size: $fontSize18;
+}
+.robotoRegularClass16 {
+  font-family: RobotoRegular, sans-serif;
+  font-size: $fontSize16;
+}
+.robotoRegularClass15 {
+  font-family: RobotoRegular, sans-serif;
+  font-size: $fontSize15;
+
+}
+
+.robotoRegGrey {
+  font-family: RobotoRegular, sans-serif;
+  font-size: $fontSize18;
+  color: #737373;
+}
+
+.robotoRegGrey16 {
+  font-family: RobotoRegular, sans-serif;
+  font-size: $fontSize16;
+  color: #737373;
+}
+
+
+
+
+
+

@@ -11,16 +11,13 @@ import { BasketItemComponent } from '../components/basket-item/basket-item.compo
 import { CafeItemComponent } from '../components/cafe-item/cafe-item.component';
 import { DishItemComponent } from '../components/dish-item/dish-item.component';
 import { HeaderComponent } from '../components/header/header.component';
+import { DishesListComponent } from '../components/dishes-list/dishes-list.component';
 
 // ----- SERVICES ------
 
 
 
 // ----- MODELS ------
-
-import { Cafe } from './models/cafe.model';
-import { Dish } from './models/dish.model';
-
 
 @NgModule({
   imports: [
@@ -34,13 +31,15 @@ import { Dish } from './models/dish.model';
     BasketItemComponent,
     CafeItemComponent,
     DishItemComponent,
-    HeaderComponent
+    HeaderComponent,
+    DishesListComponent
   ],
   exports: [
     BasketItemComponent,
     CafeItemComponent,
     DishItemComponent,
     HeaderComponent,
+    DishesListComponent,
     CommonModule,
     FormsModule,
     ReactiveFormsModule,

@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Cafe } from '../../shared/models/cafe.model';
 import { Router } from '@angular/router';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-cafe-item',
@@ -14,6 +15,7 @@ export class CafeItemComponent implements OnInit {
 
   ngOnInit() {
     console.log(this.cafe);
+    console.log(new Date().getDay());
   }
 
   selectCafe() {
