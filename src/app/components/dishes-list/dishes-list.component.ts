@@ -1,5 +1,9 @@
 import {Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges} from '@angular/core';
 import { Dish } from '../../shared/models/dish.model';
+import { MenuService } from '../../shared/services/menu.service';
+
+import { SharedModule } from '../../shared/shared.module';
+
 
 @Component({
   selector: 'app-dishes-list',
@@ -12,7 +16,9 @@ export class DishesListComponent implements OnInit, OnChanges {
 
   @Input() dishes: Dish[];
 
-  constructor() { }
+  @Output() swipeEvent = new EventEmitter<any>();
+
+  constructor(private menuService: MenuService) { }
 
   ngOnInit() {
     console.log(this.dishes);
@@ -21,6 +27,18 @@ export class DishesListComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges) {
     this.copyDishes();
+  }
+
+  swipeLeft(event) {
+    console.log('swipe Left');
+    this.menuService.swipeDirection.emit('right');
+    // this.menuService.changeCategory('left');
+  }
+
+  swipeRight(event) {
+    console.log('swipe Right');
+    this.menuService.swipeDirection.emit('left');
+    // this.menuService.changeCategory('right');
   }
 
 
@@ -69,6 +87,8 @@ export class DishesListComponent implements OnInit, OnChanges {
   changeIngridient(event) {
     console.log(this.currentDishes);
   }
+
+
 
 
 

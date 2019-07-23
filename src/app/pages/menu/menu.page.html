@@ -1,11 +1,10 @@
-
-  <app-header #menuHeader [name]="cafeName" [categories]="categories" (searchValue)="searchDishes($event)" (dishes)="setCurrentDishes($event)"></app-header>
+<app-header #menuHeader [name]="cafeName" [categories]="categories" (searchValue)="searchDishes($event)" (dishes)="setCurrentDishes($event)"></app-header>
 
 
 
 
 <ion-content no-padding>
-  <app-dishes-list [dishes]="currentDishes"></app-dishes-list>
+  <app-dishes-list  [dishes]="currentDishes" appDishListDirective  *ngIf="currentDishes"></app-dishes-list>
 
 
   <!--<ion-list *ngFor="let item of info; let i = index" class="accordion-list" lines="none" detail="false" no-padding>-->

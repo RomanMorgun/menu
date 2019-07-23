@@ -1,10 +1,8 @@
-import {
-  Component, OnInit, Input, Output, EventEmitter, AfterViewInit, Renderer2, OnChanges,
-  SimpleChanges
-} from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, AfterViewInit, Renderer2, OnChanges, SimpleChanges, OnDestroy } from '@angular/core';
 import { Category } from '../../shared/models/category.model';
 import { Dish } from '../../shared/models/dish.model';
 import { Router, NavigationEnd } from '@angular/router';
+import { MenuService } from '../../shared/services/menu.service';
 
 
 @Component({
@@ -12,7 +10,7 @@ import { Router, NavigationEnd } from '@angular/router';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })
-export class HeaderComponent implements OnInit, AfterViewInit, OnChanges {
+export class HeaderComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy {
   @Input() name: string;
   @Input() categories: Category[];
   @Output() searchValue = new EventEmitter<string>();
@@ -25,7 +23,8 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnChanges {
   public currentDishes: Dish[];
   public activeCatId: number;
   constructor(private router: Router,
-              private renderer: Renderer2) {
+              private renderer: Renderer2,
+              private menuService: MenuService) {
     // this.currentUrl = this.router.url;
     // console.log(this.currentUrl);
     // router.events.subscribe(event => {
@@ -42,18 +41,43 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   ngOnInit() {
-    this.setFirstCategory();
+    this.subcribeToChangeCat();
   }
 
   ngAfterViewInit() {
 
   }
 
+
   ngOnChanges(changes: SimpleChanges) {
     console.log(changes);
     console.log(this.categories);
+    this.setFirstCategory();
   }
 
+
+
+  subcribeToChangeCat() {
+    this.menuService.swipeDirection.subscribe( (result) => {
+      console.log(result);
+      this.changeCatFromSwipe(result);
+    });
+  }
+
+  changeCatFromSwipe(swipeDirection: string) {
+    if (this.categories) {
+      const index = this.categories.findIndex((category: Category) => {
+        return category.id === this.activeCatId;
+      });
+      if (swipeDirection === 'left' && index !== 0) {
+        this.selectCategory(this.categories[index - 1].id);
+      } else if (swipeDirection === 'right' && index !== this.categories.length - 1) {
+        this.selectCategory(this.categories[index + 1].id);
+      }
+      console.log(index);
+    }
+
+  }
 
   setFirstCategory() {
     if (this.categories) {
@@ -98,6 +122,10 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnChanges {
         console.log(this.activeCatId);
       }
     });
+  }
+
+  ngOnDestroy() {
+    this.menuService.swipeDirection.unsubscribe();
   }
 
 

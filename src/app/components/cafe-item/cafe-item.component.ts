@@ -10,16 +10,25 @@ import { formatDate } from '@angular/common';
 })
 export class CafeItemComponent implements OnInit {
   @Input() cafe: Cafe;
+  @Input() currentDay: number;
+  public currentWorkTime: string;
+
 
   constructor(private router: Router) { }
 
   ngOnInit() {
     console.log(this.cafe);
-    console.log(new Date().getDay());
+    console.log(this.currentDay);
+    // this.getCurrentDay();s
   }
 
+  getCurrentWorkTime() {
+    return this.cafe.workTime[this.currentDay - 1];
+  }
+
+
   selectCafe() {
-    this.router.navigate(['menu', {id: this.cafe.id, name: this.cafe.name}]);
+    this.router.navigate(['menu', {id: this.cafe.menuId, name: this.cafe.name}]);
   }
 
 }

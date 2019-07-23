@@ -16,6 +16,7 @@ import { DishesListComponent } from '../components/dishes-list/dishes-list.compo
 // ----- SERVICES ------
 
 
+import { DishListDirective } from '../components/dishes-list/dish-list.directive';
 
 // ----- MODELS ------
 
@@ -25,14 +26,15 @@ import { DishesListComponent } from '../components/dishes-list/dishes-list.compo
     CommonModule,
     RouterModule,
     FormsModule,
-    ReactiveFormsModule,
+    ReactiveFormsModule
   ],
   declarations: [
     BasketItemComponent,
     CafeItemComponent,
     DishItemComponent,
     HeaderComponent,
-    DishesListComponent
+    DishesListComponent,
+    DishListDirective
   ],
   exports: [
     BasketItemComponent,
@@ -43,6 +45,7 @@ import { DishesListComponent } from '../components/dishes-list/dishes-list.compo
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    DishListDirective
 
   ]
 })

@@ -21,7 +21,12 @@ import { ScanQrPage } from './pages/scan-qr/scan-qr.page';
 import { SharedModule } from './shared/shared.module';
 
 
+import { IonicGestureConfig } from './hammer.provider';
+import { HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
+
+
 // Service
+import { RequestService } from './shared/services/request.service';
 import { CafeService } from './shared/services/cafe.service';
 import {MenuService} from './shared/services/menu.service';
 import {CartService} from './shared/services/cart.service';
@@ -29,13 +34,13 @@ import {DishService} from './shared/services/dish.service';
 import { CategoryService } from './shared/services/category.service';
 
 
-
 @NgModule({
   declarations: [ AppComponent,
                   BasketPage,
                   MapPage,
                   MenuPage,
-                  ScanQrPage
+                  ScanQrPage,
+
   ],
   entryComponents: [],
   imports: [
@@ -43,19 +48,24 @@ import { CategoryService } from './shared/services/category.service';
     IonicModule.forRoot(),
     AppRoutingModule,
     HttpClientModule,
-    SharedModule
+    SharedModule,
   ],
 
   providers: [
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    {provide: HAMMER_GESTURE_CONFIG, useClass: IonicGestureConfig},
+    RequestService,
     CafeService,
     MenuService,
     CartService,
     DishService,
     CategoryService
+
   ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
+
+

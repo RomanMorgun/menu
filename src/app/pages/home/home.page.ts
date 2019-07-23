@@ -17,17 +17,29 @@ export class HomePage implements  OnInit {
   public cafes: Cafe[];
   private cafesCopy: Cafe[];
   public cafesSearch: Cafe[];
+  public currentDay: number;
 
   constructor(private cafeService: CafeService) {}
 
   ngOnInit() {
-    this.getCafes();
+    this.getCurrentDay();
+    // this.getCafes();
+    this.getAllCafes();
+  }
+
+  getCurrentDay() {
+    this.currentDay = new Date().getDay();
+  }
+
+  getAllCafes() {
+    this.cafeService.getAllCafes().subscribe( (result) => {
+      this.getCafes();
+    });
   }
 
   getCafes() {
-    this.cafes = this.cafeService.getCafes();
+    this.cafes = this.cafeService.returnCafesValue();
     this.cafesCopy = JSON.parse(JSON.stringify(this.cafes));
-
 
   }
 

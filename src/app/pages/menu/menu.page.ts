@@ -11,6 +11,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Dish } from '../../shared/models/dish.model';
 import { Menu } from '../../shared/models/menu.model';
 import { Category } from '../../shared/models/category.model';
+import {Observable} from 'rxjs/index';
 
 @Component({
   selector: 'app-menu',
@@ -20,7 +21,7 @@ import { Category } from '../../shared/models/category.model';
 
 
 export class MenuPage implements OnInit, AfterViewInit {
-  private cafeId: number;
+  private menuId: number;
   public cafeName: string;
   public menu: Menu;
   public categories: Category [];
@@ -40,8 +41,8 @@ export class MenuPage implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.getRouterParams();
-    this.getMenu();
-    console.log(this.currentDishes);
+    this.getCurrentMenu();
+    // console.log(this.currentDishes);
 
   }
   ngAfterViewInit() {
@@ -50,18 +51,46 @@ export class MenuPage implements OnInit, AfterViewInit {
   }
 
   getRouterParams() {
-    this.cafeId = +this.activatedRoute.snapshot.paramMap.get('id');
+    this.menuId = +this.activatedRoute.snapshot.paramMap.get('id');
     this.cafeName = this.activatedRoute.snapshot.paramMap.get('name');
   }
 
-  getMenu() {
-    this.menu = this.menuService.getMenu();
-    this.setCategories();
-    this.setDefaultDishes();
-    // this.currentDishes = this.menu.categories[0].dishes;
+  // getMenu() {
+  //   this.menuService.getCurrentMenu(this.cafeId).subscribe({
+  //     next(result) {
+  //       console.log(result);
+  //     },
+  //     error(msg) {
+  //       console.log(msg);
+  //     }
+  //   });
+  // }
 
-    console.log(this.menu);
+  getCurrentMenu() {
+    this.menuService.getMenu(this.menuId).subscribe( (result) => {
+      console.log(result);
+      this.setValues();
+    }, (error) => {
+      console.log(error);
+    });
+    // this.menuService.getMenu(this.menuId).subscribe({
+    //   next(result) {
+    //     console.log(result);
+    //     this.setValues();
+    //   },
+    //   error(error) {
+    //     console.log(error);
+    //   }
+    // });
   }
+
+  setValues() {
+    this.menu = this.menuService.returnMenuValue();
+    this.setDefaultDishes();
+    this.setCategories();
+  }
+
+
 
   setDefaultDishes() {
     this.currentDishes = JSON.parse(JSON.stringify(this.menu.categories[0].dishes));

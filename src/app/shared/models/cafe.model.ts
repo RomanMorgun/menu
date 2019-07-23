@@ -7,7 +7,8 @@ export class Cafe {
     public coordinates: any,
     public address: string,
     public workTime: any,
-    public telephone: string
+    public telephone: string,
+    public menuId: number
 
   ) {}
   // public menuId: number
