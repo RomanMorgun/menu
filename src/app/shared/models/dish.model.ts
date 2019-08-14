@@ -9,7 +9,7 @@ export class Dish {
     public description?: string,
     public weight?: number,
     public ingredients?: Ingredient[],
-    public logo?: string,
+    public image?: string,
     public open?: boolean,
     public count?: number
     ) {}

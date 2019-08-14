@@ -7,11 +7,15 @@ import { Observable } from 'rxjs/index';
 // import { HttpClient } from '@angular/common/http';
 
 import { RequestService } from './request.service';
+import { GeolocationService } from './geolocation.service';
 
 @Injectable()
 export class CafeService {
 
-  constructor(private requestService: RequestService) {}
+  constructor(
+    private requestService: RequestService,
+    private geolocationService: GeolocationService
+  ) {}
 
   private cafes: Cafe [];
 
@@ -54,6 +58,11 @@ export class CafeService {
   }
 
   getAllCafes(): Observable<any> {
+    let params: any;
+    if (this.geolocationService.currentGeolocation.lat !== null) {
+      params = this.geolocationService.currentGeolocation;
+      console.log(params);
+    }
     return this.requestService.get(`${COMMON_URL.cafe.getAll}`).pipe(
       tap( (result) => {
         this.setCafes(result.data);

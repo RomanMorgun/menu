@@ -5,6 +5,7 @@ import { CafeService } from '../../shared/services/cafe.service';
 
 
 
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.page.html',
@@ -19,7 +20,9 @@ export class HomePage implements  OnInit {
   public cafesSearch: Cafe[];
   public currentDay: number;
 
-  constructor(private cafeService: CafeService) {}
+  constructor(
+    private cafeService: CafeService
+  ) {}
 
   ngOnInit() {
     this.getCurrentDay();
@@ -30,6 +33,7 @@ export class HomePage implements  OnInit {
   getCurrentDay() {
     this.currentDay = new Date().getDay();
   }
+
 
   getAllCafes() {
     this.cafeService.getAllCafes().subscribe( (result) => {

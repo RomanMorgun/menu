@@ -1,5 +1,5 @@
 import {Injectable } from '@angular/core';
-import {HttpClient, HttpErrorResponse} from '@angular/common/http';
+import {HttpClient, HttpParams, HttpErrorResponse} from '@angular/common/http';
 import {retry, catchError, tap} from 'rxjs/internal/operators';
 import { Observable, throwError } from 'rxjs/index';
 // import { retry  } from 'rxjs/internal/operators';
@@ -17,8 +17,12 @@ export class RequestService {
     return throwError('Error Message');
   }
 
-  public get(url: string): Observable<any> {
-    return this.http.get(url).pipe(
+
+  public get(url: string, params = null): Observable<any> {
+    console.log(params);
+    let httpParams = new HttpParams();
+
+    return this.http.get(url, {params: httpParams}).pipe(
       tap(() => {
 
       }, (error) => {
