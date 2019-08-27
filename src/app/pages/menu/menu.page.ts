@@ -100,8 +100,6 @@ export class MenuPage implements OnInit, AfterViewInit {
     this.categories = this.catService.setCategories(this.menu.categories);
   }
 
-
-
   setCurrentDishes(dishes: Dish[]) {
     this.currentDishes = dishes;
   }

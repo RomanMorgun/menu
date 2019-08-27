@@ -1,0 +1,35 @@
+<ion-app>
+    <ion-header>
+        <ion-toolbar color="primary">
+            <ion-title>Menu View</ion-title>
+        </ion-toolbar>
+        <ion-toolbar>
+            <ion-segment scrollable
+                         (ionChange)="onSegmentChange($event)"
+                         #segment>
+                <ion-segment-button
+                        *ngFor="let page of categories; let ind = index"
+                        [value]="ind"
+                        [checked]="active === ind">
+                    <ion-label>{{page.name}}</ion-label>
+                </ion-segment-button>
+            </ion-segment>
+        </ion-toolbar>
+    </ion-header>
+
+    <ion-content>
+        <ion-slides (ionSlideDidChange)="onSlideDidChange($event)"
+                    #slides>
+            <ion-slide  *ngFor="let page of categories; let ind = index">
+                <ion-content>
+                    {{ page.id }}
+                    <div *ngFor="let dish of page?.dishes">
+                        <img *ngIf="dish.image" [src]="dish.image"
+                             style="width: 100%; height: auto;"
+                             [alt]="dish.name">
+                    </div>
+                </ion-content>
+            </ion-slide>
+        </ion-slides>
+    </ion-content>
+</ion-app>

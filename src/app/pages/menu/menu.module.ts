@@ -9,7 +9,6 @@ import { MenuPage } from './menu.page';
 
 import { SharedModule } from '../../shared/shared.module';
 
-
 const routes: Routes = [
   {
     path: '',

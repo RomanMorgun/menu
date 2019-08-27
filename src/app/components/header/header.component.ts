@@ -87,7 +87,6 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnChanges, OnDest
       }
     }
 
-
   searchClick() {
     this.nameHide === false ? this.nameHide = true : this.nameHide = false;
     console.log('search CLICK');
@@ -127,8 +126,6 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnChanges, OnDest
   ngOnDestroy() {
     this.menuService.swipeDirection.unsubscribe();
   }
-
-
 
   // selectCategory(event, category) {
   //   this.menuItems.forEach(element => {

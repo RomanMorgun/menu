@@ -21,14 +21,13 @@
         </div>
       </div>
 
-
     </ion-toolbar>
 
     <div class="slideMenu" *ngIf="categories">
-      <div class="slideMenu__item" *ngFor="let cat of categories" (click)="selectCategory(cat.id)" [ngClass]="{activeCategory: cat.id === activeCatId}">
-        <span>{{cat.name}}</span>
-      </div>
+    <div class="slideMenu__item" *ngFor="let cat of categories" (click)="selectCategory(cat.id)" [ngClass]="{activeCategory: cat.id === activeCatId}">
+      <span>{{cat.name}}</span>
     </div>
+  </div>
 
   </ion-header>
 </div>
