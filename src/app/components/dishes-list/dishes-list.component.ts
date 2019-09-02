@@ -1,7 +1,8 @@
 import {Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges} from '@angular/core';
 import { Dish } from '../../shared/models/dish.model';
 import { MenuService } from '../../shared/services/menu.service';
-
+import { CartService } from '../../shared/services/cart.service';
+import { ActivatedRoute } from '@angular/router';
 import { SharedModule } from '../../shared/shared.module';
 
 
@@ -13,20 +14,28 @@ import { SharedModule } from '../../shared/shared.module';
 export class DishesListComponent implements OnInit, OnChanges {
 
   public currentDishes: Dish[];
+  private cafeId: number;
+  private cafeName: string;
 
   @Input() dishes: Dish[];
 
   @Output() swipeEvent = new EventEmitter<any>();
 
-  constructor(private menuService: MenuService) { }
+  constructor(private menuService: MenuService,
+              private activateRouter: ActivatedRoute,
+              private cartService: CartService) { }
 
   ngOnInit() {
-    console.log(this.dishes);
+    this.getQueryParams();
     this.copyDishes();
   }
 
   ngOnChanges(changes: SimpleChanges) {
     this.copyDishes();
+  }
+
+  getQueryParams() {
+      this.cafeId = +this.activateRouter.snapshot.paramMap.get('cafeId');
   }
 
   swipeLeft(event) {
@@ -52,23 +61,23 @@ export class DishesListComponent implements OnInit, OnChanges {
     }
   }
 
-  addToCart(dish, dishId, action) {
+  addToCart(dish, action) {
     console.log(dish);
-    this.changeCountValue(dishId, action);
-
+    const cartData = this.collectDataForCart(dish, action);
+    this.cartService.addDishesToOrder(cartData);
   }
 
-  changeCountValue(dishId, action) {
-    this.currentDishes.map(dish => {
-      if (dish.id === dishId) {
-        if (action === 'add') {
-          dish.count++;
-        } else if (action === 'remove') {
-          dish.count--;
-        }
-      }
-    });
+  collectDataForCart(dish, action) {
+    let cartData = {};
+    cartData = {
+      orderDish: dish,
+      currentAction: action,
+      cafeName: this.cafeName,
+      cafeId: this.cafeId
+    };
+    return cartData;
   }
+
 
   showDetailInfo(dishId) {
     this.currentDishes.map(dish => {

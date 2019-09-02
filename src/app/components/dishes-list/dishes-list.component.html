@@ -23,7 +23,7 @@
         </div>
         <div class="IngredientsAndButton">
           <div class="showIngred robotoRegularClass15">
-            <span (click)="showDetailInfo(dish.id)">Більш детально: </span>
+            <span *ngIf="dish.ingredients.length > 0" (click)="showDetailInfo(dish.id)">Більш детально: </span>
           </div>
           <div class="changeAmount">
             <ion-button size="small" class="removeBtn robotoRegGrey" (click)="addToCart(dish, dish.id, 'remove')" *ngIf="dish.count > 0">

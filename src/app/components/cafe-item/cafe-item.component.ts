@@ -28,7 +28,8 @@ export class CafeItemComponent implements OnInit {
 
 
   selectCafe() {
-    this.router.navigate(['menu', {id: this.cafe.menuId, name: this.cafe.name}]);
+    console.log(this.cafe.menuId);
+    this.router.navigate(['menu',  {id: this.cafe.menuId, name: this.cafe.name, cafeId: this.cafe.id}]);
   }
 
 }

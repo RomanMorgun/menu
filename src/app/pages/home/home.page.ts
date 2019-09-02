@@ -3,9 +3,6 @@ import { Cafe } from '../../shared/models/cafe.model';
 import { CafeService } from '../../shared/services/cafe.service';
 
 
-
-
-
 @Component({
   selector: 'app-home',
   templateUrl: './home.page.html',
@@ -17,7 +14,6 @@ export class HomePage implements  OnInit {
   public appName = 'AppName';
   public cafes: Cafe[];
   private cafesCopy: Cafe[];
-  public cafesSearch: Cafe[];
   public currentDay: number;
 
   constructor(
@@ -26,7 +22,6 @@ export class HomePage implements  OnInit {
 
   ngOnInit() {
     this.getCurrentDay();
-    // this.getCafes();
     this.getAllCafes();
   }
 
@@ -49,7 +44,6 @@ export class HomePage implements  OnInit {
 
   copyForSearch() {
     this.cafes = JSON.parse(JSON.stringify(this.cafesCopy));
-    // this.cafesSearch = JSON.parse(JSON.stringify(this.cafes));
   }
 
   searchCafe(searchValue: string) {

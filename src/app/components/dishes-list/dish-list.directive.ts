@@ -28,8 +28,8 @@ export class DishListDirective {
   // }
 
   @HostListener('click') onClickFunc() {
-    console.log('click');
-    console.log(event);
+    // console.log('click');
+    // console.log(event);
 
   }
 

@@ -17,6 +17,7 @@ export class DishService {
   setDishes(dishes: Dish[]) {
     this.dishes = dishes;
   }
+
 }
 
 

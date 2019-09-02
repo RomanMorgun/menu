@@ -26,7 +26,6 @@ export class MenuPage implements OnInit, AfterViewInit {
   public menu: Menu;
   public categories: Category [];
   public currentDishes: Dish[];
-  private elements: any;
   public automaticClose = false;
 
   @ViewChild('menuHeader') menuHeader: HeaderComponent;
