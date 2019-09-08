@@ -12,6 +12,7 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
+import { GoogleMaps } from '@ionic-native/google-maps/ngx';
 // PAGES
 import { BasketPage } from './pages/basket/basket.page';
 // import { MapPage } from './pages/map/map.page';
@@ -66,7 +67,8 @@ import { GeolocationService } from './shared/services/geolocation.service';
     DishService,
     CategoryService,
     GeolocationService,
-BarcodeScanner
+BarcodeScanner,
+      GoogleMaps
   ],
   bootstrap: [AppComponent]
 })
