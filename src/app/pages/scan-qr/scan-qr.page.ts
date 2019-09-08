@@ -27,14 +27,13 @@ export class ScanQrPage implements OnInit {
     this.scanCode();
   }
   returnOnChoose() {
-    this.rt.navigate(['/map']);
+    this.rt.navigate(['/selectAction']);
   }
 
   scanCode() {
     this.barcodeScanner
         .scan()
         .then(barcodeData => {
-          alert('Barcode data ' + JSON.stringify(barcodeData));
           this.scannedData = barcodeData;
           this.returnOnChoose();
         })
