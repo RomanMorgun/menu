@@ -94,7 +94,7 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnChanges, OnDest
   }
 
   locationClick() {
-    console.log('location CLICK');
+    this.router.navigate(['map']);
   }
 
   cartClick() {

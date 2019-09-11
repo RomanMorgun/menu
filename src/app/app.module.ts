@@ -35,13 +35,15 @@ import {CartService} from './shared/services/cart.service';
 import {DishService} from './shared/services/dish.service';
 import { CategoryService } from './shared/services/category.service';
 import { GeolocationService } from './shared/services/geolocation.service';
+import {MarkerCafeComponent} from "./pages/map/marker-cafe/marker-cafe.component";
 
 
 @NgModule({
   declarations: [ AppComponent,
                   BasketPage,
                   MenuPage,
-                  ChooseActionPage
+                  ChooseActionPage,
+      MarkerCafeComponent
 
   ],
   entryComponents: [],

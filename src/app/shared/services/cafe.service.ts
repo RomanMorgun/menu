@@ -14,7 +14,8 @@ export class CafeService {
 
   constructor(
     private requestService: RequestService,
-    private geolocationService: GeolocationService
+    private geolocationService: GeolocationService,
+
   ) {}
 
   private cafes: Cafe [];

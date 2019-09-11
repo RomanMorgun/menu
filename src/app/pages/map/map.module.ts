@@ -6,6 +6,9 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { MapPage } from './map.page';
+import {MarkerCluster} from "@ionic-native/google-maps";
+import {MarkerCafeComponent} from "./marker-cafe/marker-cafe.component";
+import {RouteParamService} from "../../shared/services/route-param.service";
 
 const routes: Routes = [
   {
@@ -21,6 +24,7 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [MapPage]
+  declarations: [MapPage],
+  providers: [ RouteParamService]
 })
 export class MapPageModule {}

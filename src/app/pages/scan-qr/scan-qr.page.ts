@@ -4,6 +4,7 @@ import {
   BarcodeScanner
 } from '@ionic-native/barcode-scanner/ngx';
 import {Router} from '@angular/router';
+import {QrService} from "../../shared/services/qr.service";
 @Component({
   selector: 'app-scan-qr',
   templateUrl: './scan-qr.page.html',
@@ -12,13 +13,14 @@ import {Router} from '@angular/router';
 export class ScanQrPage implements OnInit {
 
   constructor(private barcodeScanner: BarcodeScanner,
-              private  rt: Router) {
+              private  rt: Router,
+              private qr: QrService) {
     this.barcodeScannerOptions = {
       showTorchButton: true,
       showFlipCameraButton: true
     };
   }
-  scannedData: {};
+  scannedData: string;
   barcodeScannerOptions: BarcodeScannerOptions;
 
 
@@ -26,16 +28,15 @@ export class ScanQrPage implements OnInit {
   ngOnInit() {
     this.scanCode();
   }
-  returnOnChoose() {
-    this.rt.navigate(['/selectAction']);
-  }
 
   scanCode() {
     this.barcodeScanner
         .scan()
         .then(barcodeData => {
-          this.scannedData = barcodeData;
-          this.returnOnChoose();
+          this.scannedData = barcodeData.text;
+          this.qr.saveId(this.scannedData);
+          console.log(barcodeData);
+            this.rt.navigate(['/selectAction']);
         })
         .catch(err => {
           console.log('Error', err);

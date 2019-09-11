@@ -22,6 +22,6 @@
     </div>
   </div>
   <div class="cafeLocation robotoRegGrey16">
-    <ion-icon name="pin"></ion-icon>
+    <ion-icon class="marker" name="pin" (click)="routeParamService.navigationMap(cafe.position[0], cafe.position[1]); geoCafe()"></ion-icon>
   </div>
 </div>
