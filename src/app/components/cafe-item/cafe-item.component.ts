@@ -13,8 +13,9 @@ import {CustomGeoCoordinateService} from "../../pages/map/custom-geo-coordinate.
 export class CafeItemComponent implements OnInit {
   @Input() cafe: Cafe;
   @Input() currentDay: number;
+  @Input() phone: number;
   public currentWorkTime: string;
-
+  public workTime: any;
 
   constructor(private router: Router,
               private routeParamService: RouteParamService,
@@ -23,6 +24,7 @@ export class CafeItemComponent implements OnInit {
   ngOnInit() {
     console.log(this.cafe);
     console.log(this.currentDay);
+    this.workTime = this.cafe.workTime;
     // this.getCurrentDay();s
   }
 

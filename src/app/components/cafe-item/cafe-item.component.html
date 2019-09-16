@@ -7,21 +7,24 @@
     <div class="cafeData__item">
       <!--<span class="cafeData__item&#45;&#45;staticText">Назва: </span>-->
       <span class="cafeData__item--name robotoMeduimClass20">{{cafe.name}}</span>
+      <div class="cafeLocation robotoRegGrey16">
+        <ion-icon class="marker" name="pin" (click)="routeParamService.navigationMap(cafe.position[0], cafe.position[1]); geoCafe()"></ion-icon>
+      </div>
     </div>
     <div class="cafeData__item">
       <span class="cafeData__item--staticText robotoRegGrey16">Адреса: </span>
       <span class="cafeData__item--address robotoRegGrey16">{{cafe.address}}</span>
     </div>
-    <!--<div class="cafeData__item">-->
-      <!--<span class="cafeData__item&#45;&#45;staticText">Номер телефону: </span>-->
-      <!--<span class="cafeData__item&#45;&#45;telephone">{{cafe.telephone}}</span>-->
-    <!--</div>-->
     <div class="cafeData__item">
-      <span class="cafeData__item--staticText robotoRegGrey16">Часи роботи: </span>
-      <span class="cafeData__item--timeWork robotoRegGrey16">{{getCurrentWorkTime()}}</span>
+      <span class="cafeData__item--staticText">Номер телефону: </span>
+      <span class="cafeData__item--telephone">{{cafe.phone}}</span>
+    </div>
+    <div class="cafeData__info">
+      <span class="cafeData__item--staticText robotoRegGrey16">График роботи: </span>
+      <ul class="cafeData__item--timeWork robotoRegGrey16">
+        <li  class="cafeItem__item--timeWork--list" *ngFor="let time of workTime">{{ time }}</li>
+      </ul>
     </div>
   </div>
-  <div class="cafeLocation robotoRegGrey16">
-    <ion-icon class="marker" name="pin" (click)="routeParamService.navigationMap(cafe.position[0], cafe.position[1]); geoCafe()"></ion-icon>
-  </div>
+
 </div>

@@ -2,7 +2,7 @@ import { Cafe } from '../models/cafe.model';
 import { Injectable } from '@angular/core';
 import { COMMON_URL } from './common.url';
 import {catchError, tap} from 'rxjs/internal/operators';
-import { Observable } from 'rxjs/index';
+import {Observable, Subject} from 'rxjs/index';
 // import { Observable } from 'rxjs/index';
 // import { HttpClient } from '@angular/common/http';
 
@@ -17,9 +17,9 @@ export class CafeService {
     private geolocationService: GeolocationService,
 
   ) {}
-
+    subject: Subject<Object>;
   private cafes: Cafe [];
-
+  cafe: object;
   // private cafes: Cafe[] = [
   //   new Cafe (
   //     0,
@@ -73,6 +73,12 @@ export class CafeService {
       })
     );
   }
+
+  getOneCafe(id) {
+    return this.requestService.get(`${COMMON_URL.cafe.getOne}/${ id }`);
+  }
+
+
 
 }
 

@@ -1,4 +1,4 @@
-import {Component, Input, NgZone, OnInit} from '@angular/core';
+import {Component, Input, NgZone, OnInit, Output} from '@angular/core';
 import {
     GoogleMaps,
     GoogleMap,
@@ -9,11 +9,22 @@ import {
     Marker,
     Environment, MarkerIcon
 } from '@ionic-native/google-maps/ngx';
-import {Platform} from '@ionic/angular';
+import {AlertController, ModalController, Platform} from '@ionic/angular';
 import {GeolocationService} from '../../shared/services/geolocation.service';
 import {RouteParamService} from "../../shared/services/route-param.service";
 import {CustomGeoCoordinateService} from "./custom-geo-coordinate.service";
 import {CafeService} from "../../shared/services/cafe.service";
+import {
+    customAlertEnter,
+    customAlertLive,
+    customModalEnter,
+    myLeaveAnimation
+} from "../../shared/services/customAlertEnter";
+import {Router} from "@angular/router";
+
+import {ModalComponent} from "./modal/modal.component";
+import {toNumbers} from "@angular/compiler-cli/src/diagnostics/typescript_version";
+
 
 @Component({
   selector: 'app-map',
@@ -22,22 +33,28 @@ import {CafeService} from "../../shared/services/cafe.service";
 })
 export class MapPage implements OnInit {
     @Input() position: object;
+    cafe: object;
   map: GoogleMap;
   markersOptions = [];
   markers = [];
   dragMapEvent;
   cafeCoordinate: any;
   cityCoordinate: any;
+    public alert: any;
+    coordinateHist: any;
+options: any;
   constructor(
                public platform: Platform,
                public zone: NgZone,
+               private router: Router,
                public routeParamService: RouteParamService,
                public geo: GeolocationService,
                private geoPosition: CustomGeoCoordinateService,
                public cafeInfoServ: CafeService,
-
+               public modalController: ModalController,
+               public alertCtrl: AlertController
               ) {
-      console.log(this.routeParamService.cafeCoordinate);
+
   }
 
   ngOnInit() {
@@ -66,16 +83,22 @@ export class MapPage implements OnInit {
   }
 
   loadMap() {
+    //  this.coordinateHist = null;
       let icon: MarkerIcon = {
-          url: "../../assets/icon/coffee-solid.svg",
+          url: "../../assets/icon/Location_Icons/svg/Coffee_5.svg",
           size: {
               width: 35,
               height: 40
           }
       };
 
-
-
+      let iconCustom: MarkerIcon = {
+          url: "../../assets/icon/Coffee_10.png",
+          size: {
+              width: 35,
+              height: 40
+          }
+      };
 
       Environment.setEnv({
           API_KEY_FOR_BROWSER_RELEASE: 'AIzaSyDGNinnVlrH3QrIyL5Abo2Z42aDJ4KLW3c',
@@ -83,36 +106,23 @@ export class MapPage implements OnInit {
       });
     // initialize the map in the appropriate container
       let mapOptions: GoogleMapOptions = {
-          backgroundColor: 'white',
-          controls: {
-              compass: true,
-              myLocationButton: true,
-              indoorPicker: true,
-              zoom: true
-          },
-          gestures: {
-              scroll: true,
-              tilt: true,
-              rotate: true,
-              zoom: true
-          },
           camera: {
-              target: this.cafeCoordinate,
-              tilt: 30,
-              zoom: 15,
-              bearing: 50
+              target: this.cityCoordinate,
+              zoom: 18,
+              tilt: 30
           }
       };
 
       this.map = GoogleMaps.create('map_canvas', mapOptions);
 
-      let marker: Marker = this.map.addMarkerSync({
+      let markerCheked: Marker = this.map.addMarkerSync({
           title: 'Ionic',
           icon: icon,
           animation: 'DROP',
-          position: this.cafeCoordinate,
+          position: this.cityCoordinate,
       });
-      marker.on(GoogleMapsEvent.MARKER_CLICK).subscribe(() => {
+      markerCheked.on(GoogleMapsEvent.MARKER_CLICK).subscribe(() => {
+          markerCheked.setIcon(iconCustom);
       });
 
       this.map.addEventListenerOnce(GoogleMapsEvent.MAP_READY)
@@ -126,15 +136,20 @@ export class MapPage implements OnInit {
                       });
               }
 
-              if (this.cityCoordinate){
-                  this.cameraPosition(this.cityCoordinate);
+              if (this.cafeCoordinate){
+                  this.cameraPosition(this.cafeCoordinate);
                   // this.routeParamService.position = null;
-              } else {
+              }  else if (this.coordinateHist){
+                          // if the location is determined, the camera will move to it
+                          this.cameraPosition(this.coordinateHist);
+
+          }  else  {
                   // find out the current location device position
                   this.geoPosition.getMyGeoLocation()
                       .then((location) => {
                           // if the location is determined, the camera will move to it
-                          this.cameraPosition(location)
+                          this.cameraPosition(location);
+                          this.loadCafe();
                       })
                       .catch((msg) => {
                           // show warn message
@@ -146,6 +161,7 @@ export class MapPage implements OnInit {
   }
 
     loadCafe(){
+
         // get border coordinates of current map window
         let mapRange = this.map.getVisibleRegion();
 
@@ -168,6 +184,7 @@ export class MapPage implements OnInit {
 
                 // render cafe
                 this.displayMarkers(this.markersOptions);
+
 
 
             });
@@ -200,7 +217,7 @@ export class MapPage implements OnInit {
 
     createMarkerOption(cafe){
         let icon: MarkerIcon = {
-            url: "../../assets/icon/Coffee_10.png",
+            url: "../../assets/icon/untitled(1).svg",
             size: {
                 width: 35,
                 height: 40
@@ -214,41 +231,78 @@ export class MapPage implements OnInit {
                 lat: cafe.position[0],
                 lng: cafe.position[1]
             },
+            snippet: String(cafe.id),
             animation: 'BOUNCE',
             icon: icon,
+
             disableAutoPan: true
         });
 
     }
 
     displayMarkers(markers){
+        let iconCustom: MarkerIcon = {
+            url: "../../assets/icon/untitled(1).svg",
+            size: {
+                width: 35,
+                height: 40
+            }
+        };
         // take every marker options in array
         markers.forEach((markerOptions) => {
             // and create google marker
             let marker: Marker = this.map.addMarkerSync(markerOptions);
             this.markers.push(marker);
-
             // add cafe listener for created marker
+
             marker.on(GoogleMapsEvent.MARKER_CLICK)
                     .subscribe(() => {
-                       this.cameraPosition(marker.getPosition());
+                        this.cafeInfoServ.getOneCafe(marker.getSnippet()).subscribe((res) =>{
+                            marker.setIcon({url:'../../assets/icon/untitled.svg',  size: {
+                                    width: 35,
+                                    height: 40
+                                }});
+                            console.log(res);
+                            this.cafe = res.data;
+                            console.log(this.cafe);
+                            this.cameraPosition(marker.getPosition());
+                           this.openModal(marker.getSnippet());
+                            this.coordinateHist = marker.getPosition();
+                        });
+
+
+                      //
+                    //
+                    //
+
+                      // console.log(marker.getSnippet());
+                     //  this.presentAlertConfirm(marker.getTitle(), marker.getSnippet());
 
                 })
         });
     }
 
     cameraPosition(latLng) {
+        let iconCustom: MarkerIcon = {
+            url: "../../assets/icon/untitled.svg",
+            size: {
+                width: 35,
+                height: 40
+            }
+        };
         // create option for camera movement
         let options = {
+            icon: iconCustom,
             target: latLng,
-            zoom: 18,
+            zoom: 17,
             duration: 2000
         };
         // move camera to needed point
         this.map.animateCamera(options)
             .finally(() => {
                 // then load and display events in the current line of sight
-                this.loadCafe();
+               // this.loadCafe();
+
                 this.cafeCoordinate = null;
             });
     }
@@ -262,6 +316,52 @@ export class MapPage implements OnInit {
         this.markers.length = 0;
         this.markersOptions.length = 0;
     }
+
+    async presentAlertConfirm(title, id) {
+        const alert = await this.alertCtrl.create({
+            animated: true,
+            header: 'Просмотреть меню ?',
+            cssClass: 'alertCtrl',
+            message: title,
+            buttons: [
+                {
+                    text: 'Cancel',
+                    role: 'cancel',
+                    cssClass: 'secondary',
+                    handler: (blah) => {
+
+                    }
+                }, {
+                    text: 'Okay',
+                    handler: () => {
+                        console.log('Confirm Okay');
+                        this.router.navigate(['menu', {id: id, name: title}]);
+                    }
+                }
+            ],
+            enterAnimation: customAlertEnter,
+            leaveAnimation: customAlertLive
+        });
+        await alert.present();
+    }
+
+    async openModal(id) {
+        const modal: HTMLIonModalElement =
+            await this.modalController.create({
+                component: ModalComponent,
+                componentProps: {cafe: this.cafe},
+                enterAnimation: customModalEnter,
+                leaveAnimation: myLeaveAnimation,
+            });
+        // modal.onDidDismiss().then((detail: OverlayEventDetail) => {
+        //     if (detail !== null) {
+        //         console.log('The result:', detail.data);
+        //     }
+        // });
+       console.log(this.cafe);
+        await modal.present();
+    }
+
 
 
 

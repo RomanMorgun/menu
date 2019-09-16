@@ -1,0 +1,27 @@
+
+<div class="wrapper">
+  <div class="line"></div>
+  <div class="cafeItem">
+    <!--routerLink="/menu"-->
+
+    <div class="cafeLogo"  (click)="navCafe(cafe)">
+      <img [src]="cafe.logo" alt="Cafe Logotype">
+    </div>
+    <div class="cafeData">
+      <div class="cafeData__item">
+        <span class="cafeData__item--name robotoMeduimClass20">{{cafe.name}}</span>
+
+      </div>
+      <div class="cafeData__item">
+        <span class="cafeData__item--staticText robotoRegGrey16">Адреса: </span>
+        <span class="cafeData__item--address robotoRegGrey16">{{cafe.address}}</span>
+      </div>
+      <div class="cafeData__item">
+        <span class="cafeData__item--staticText">Номер телефону: </span>
+        <span class="cafeData__item--telephone">{{cafe.phone}}</span>
+      </div>
+
+    </div>
+
+  </div>
+</div>

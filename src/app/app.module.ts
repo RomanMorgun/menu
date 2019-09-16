@@ -36,43 +36,47 @@ import {DishService} from './shared/services/dish.service';
 import { CategoryService } from './shared/services/category.service';
 import { GeolocationService } from './shared/services/geolocation.service';
 import {MarkerCafeComponent} from "./pages/map/marker-cafe/marker-cafe.component";
+import {customAlertEnter} from "./shared/services/customAlertEnter";
+import {ModalComponent} from "./pages/map/modal/modal.component";
 
 
 @NgModule({
-  declarations: [ AppComponent,
-                  BasketPage,
-                  MenuPage,
-                  ChooseActionPage,
-      MarkerCafeComponent
+    declarations: [AppComponent,
+        BasketPage,
+        MenuPage,
+        ChooseActionPage,
+        MarkerCafeComponent,
+        ModalComponent
+    ],
+    entryComponents: [ModalComponent],
+    imports: [
+        BrowserModule,
+        IonicModule.forRoot(),
+        AppRoutingModule,
+        HttpClientModule,
+        SharedModule,
 
-  ],
-  entryComponents: [],
-  imports: [
-    BrowserModule,
-    IonicModule.forRoot(),
-    AppRoutingModule,
-    HttpClientModule,
-    SharedModule,
+    ],
 
-  ],
+    providers: [
+        StatusBar,
+        SplashScreen,
+        {provide: RouteReuseStrategy, useClass: IonicRouteStrategy},
+        {provide: HAMMER_GESTURE_CONFIG, useClass: IonicGestureConfig},
+        Geolocation,
+        RequestService,
+        CafeService,
+        MenuService,
+        CartService,
+        DishService,
+        CategoryService,
+        GeolocationService,
+        BarcodeScanner,
+        GoogleMaps,
 
-  providers: [
-    StatusBar,
-    SplashScreen,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    {provide: HAMMER_GESTURE_CONFIG, useClass: IonicGestureConfig},
-    Geolocation,
-    RequestService,
-    CafeService,
-    MenuService,
-    CartService,
-    DishService,
-    CategoryService,
-    GeolocationService,
-BarcodeScanner,
-      GoogleMaps
-  ],
-  bootstrap: [AppComponent]
+    ],
+
+    bootstrap: [AppComponent]
 })
 export class AppModule {}
 

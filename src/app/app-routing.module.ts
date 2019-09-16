@@ -12,6 +12,7 @@ const routes: Routes = [
   { path: 'scan-qr', loadChildren: './pages/scan-qr/scan-qr.module#ScanQrPageModule' },
   { path: 'map', loadChildren: './pages/map/map.module#MapPageModule' },
   { path: 'history', loadChildren: './pages/history/history.module#HistoryPageModule' },
+
 ];
 
 @NgModule({

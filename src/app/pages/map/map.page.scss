@@ -1,8 +1,12 @@
 #map_canvas{
   width: 100vw;
-  height: 100vh;
+  height: 95vh;
 }
 ion-icon{
   font-size: 3em;
   color: gray;
+}
+.alertCtrl {
+  margin-top: 120%;
+  transform: translateX(10) !important;
 }
