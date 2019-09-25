@@ -8,6 +8,8 @@ import { IonicModule } from '@ionic/angular';
 import { MapPage } from './map.page';
 
 import {RouteParamService} from "../../shared/services/route-param.service";
+import {SharedModule} from "../../shared/shared.module";
+import {AgmCoreModule} from "@agm/core";
 
 
 
@@ -26,8 +28,11 @@ const routes: Routes = [
         IonicModule,
 
         RouterModule.forChild(routes),
-
-
+        SharedModule,
+        AgmCoreModule.forRoot({
+            apiKey: 'YOUR API KEY',
+            libraries: ['places'],
+        }),
     ],
   declarations: [MapPage],
   providers: [ RouteParamService ],

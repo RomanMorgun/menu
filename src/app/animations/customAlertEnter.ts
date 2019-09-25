@@ -1,24 +1,24 @@
-import { Animation } from '@ionic/core'
+import { Animation } from '@ionic/core';
 
 export function customModalEnter(AnimationC: Animation, baseEl: HTMLElement): Promise<Animation> {
 
     const baseAnimation = new AnimationC();
-
+    console.log('animation');
     const backdropAnimation = new AnimationC();
     backdropAnimation.addElement(baseEl.querySelector('ion-backdrop'));
 
     const wrapperAnimation = new AnimationC();
     wrapperAnimation.addElement(baseEl.querySelector('.modal-wrapper'));
 
-    wrapperAnimation.beforeStyles({ 'opacity': 1 })
-        .fromTo('translateY', `translateY(-${baseEl.clientHeight}px)`, '75%');
+    wrapperAnimation.beforeStyles({ opacity: 1 })
+        .fromTo('translateY', `1000px`, '70%');
 
-    backdropAnimation.fromTo('translateY', `translateY(-${baseEl.clientHeight}px)`, '25%');
+    backdropAnimation.fromTo('translateY', `1000px`, '10%');
 
     return Promise.resolve(baseAnimation
         .addElement(baseEl)
         .easing('cubic-bezier(0.36,0.66,0.04,1)')
-        .duration(1000)
+        .duration(800)
         .beforeAddClass('show-modal')
         .add(backdropAnimation)
         .add(wrapperAnimation));
@@ -37,7 +37,7 @@ export function myLeaveAnimation(AnimationC: Animation, baseEl: HTMLElement): Pr
     wrapperAnimation.addElement(wrapperEl);
     const wrapperElRect = wrapperEl!.getBoundingClientRect();
 
-    wrapperAnimation.beforeStyles({ 'opacity': 1 })
+    wrapperAnimation.beforeStyles({ opacity: 1 })
         .fromTo('translateY', '75%', '1000px');
 
     backdropAnimation.fromTo('opacity', 0.0, 0.0);
@@ -66,7 +66,7 @@ export function customAlertLive(AnimationL: Animation, baseEl: HTMLElement): Pro
 
     backdropAnimation.fromTo('opacity', 0.01, 0.3);
 
-    wrapperAnimation.beforeStyles({ 'opacity': 1 });
+    wrapperAnimation.beforeStyles({ opacity: 1 });
     wrapperAnimation.fromTo('transform', `translateY(-100px)`, 'translateY(-200px)');
 
     return Promise.resolve(baseAnimation
@@ -93,7 +93,7 @@ export function customAlertEnter(AnimationC: Animation, baseEl: HTMLElement): Pr
 
     backdropAnimation.fromTo('opacity', 0.01, 0.3);
 
-    wrapperAnimation.beforeStyles({ 'opacity': 1 });
+    wrapperAnimation.beforeStyles({ opacity: 1 });
     wrapperAnimation.fromTo('transform', `translateY(${baseEl.clientHeight}px)`, 'translateY(-200px)');
 
     return Promise.resolve(baseAnimation

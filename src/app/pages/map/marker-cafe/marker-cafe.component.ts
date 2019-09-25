@@ -13,20 +13,8 @@ export class MarkerCafeComponent implements OnInit {
 
   }
 
-  markerEvents;
-
-  ngOnInit() {
-    this.routeParamService.markerCafes
-        .subscribe((events) => {
-          this.markerEvents = events;
-          if (events && events.length > 0){
-            this.routeParamService.isCafeOnPage = true;
-          }
-        });
-  }
 
 
-  ngOnDestroy(){
-    // this.routeParamService.isEventsOnPage = false;
-  }
+    ngOnInit() {
+    }
 }

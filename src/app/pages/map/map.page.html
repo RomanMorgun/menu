@@ -1,9 +1,18 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>map</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="{{previousUrl}}"></ion-back-button>
+    </ion-buttons>
+    <div class="inputCtn">
+        <ion-searchbar autocorrect="off" autocapitalize="off" spellcheck="off" placeholder="Search..." class="search-box" [(ngModel)]="searchbar"></ion-searchbar>
+        <button ion-button (click)="onButton()"><ion-icon name="search"></ion-icon></button>
+    </div>
+    <ion-button>
+      <ion-icon name="search"></ion-icon>
+    </ion-button>
+
   </ion-toolbar>
 </ion-header>
-
 
 
 <ion-content>

@@ -77,7 +77,13 @@ export class CafeService {
   getOneCafe(id) {
     return this.requestService.get(`${COMMON_URL.cafe.getOne}/${ id }`);
   }
+  getZoneCafe( obj: any): Observable<any> {
+    return this.requestService.get(`${COMMON_URL.cafe.getAll}`, {obj});
+  }
 
+  // getWithObj(nameUrl: any, obj: any): Observable<any> {
+  //   return this.requestService.get<any>( this.api + nameUrl, {'params': obj}).pipe(catchError(this.errors));
+  // }
 
 
 }

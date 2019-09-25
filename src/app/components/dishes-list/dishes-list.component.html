@@ -15,6 +15,8 @@
           <div class="dishName__price robotoMeduimClass20">
             <span>{{dish.price}}</span>
             <span> грн</span>
+            <span>{{dish.weight}}</span>
+            <span> г</span>
           </div>
         </div>
         <div class="dishDescription robotoRegGrey16">
@@ -43,6 +45,7 @@
             <div class="ingredientsItem" *ngFor="let ingredient of dish.ingredients; let i = index">
               <ion-checkbox [(ngModel)]="ingredient.included" (ionChange)="changeIngridient($event)"></ion-checkbox>
               <ion-label>
+
                 <span>{{ingredient.name }} </span>
                 <span>{{ingredient.price }}</span>
                 <span>грн</span>

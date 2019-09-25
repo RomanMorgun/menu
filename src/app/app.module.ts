@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
@@ -35,9 +35,9 @@ import {CartService} from './shared/services/cart.service';
 import {DishService} from './shared/services/dish.service';
 import { CategoryService } from './shared/services/category.service';
 import { GeolocationService } from './shared/services/geolocation.service';
-import {MarkerCafeComponent} from "./pages/map/marker-cafe/marker-cafe.component";
-import {customAlertEnter} from "./shared/services/customAlertEnter";
-import {ModalComponent} from "./pages/map/modal/modal.component";
+import {MarkerCafeComponent} from './pages/map/marker-cafe/marker-cafe.component';
+
+import {ModalComponent} from './pages/map/modal/modal.component';
 
 
 @NgModule({

@@ -1,9 +1,11 @@
-import { Component, OnInit, Input } from '@angular/core';
+import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import { Cafe } from '../../shared/models/cafe.model';
 import { Router } from '@angular/router';
-import { formatDate } from '@angular/common';
+
 import {RouteParamService} from "../../shared/services/route-param.service";
-import {CustomGeoCoordinateService} from "../../pages/map/custom-geo-coordinate.service";
+
+
+
 
 @Component({
   selector: 'app-cafe-item',
@@ -14,12 +16,11 @@ export class CafeItemComponent implements OnInit {
   @Input() cafe: Cafe;
   @Input() currentDay: number;
   @Input() phone: number;
-  public currentWorkTime: string;
   public workTime: any;
-
+  public coordinate: object;
   constructor(private router: Router,
               private routeParamService: RouteParamService,
-  private customCoordiname: CustomGeoCoordinateService ) { }
+ ) { }
 
   ngOnInit() {
     console.log(this.cafe);
@@ -28,16 +29,13 @@ export class CafeItemComponent implements OnInit {
     // this.getCurrentDay();s
   }
 
-  getCurrentWorkTime() {
-    return this.cafe.workTime[this.currentDay - 1];
-  }
-
 
   selectCafe() {
     this.router.navigate(['menu', {id: this.cafe.menuId, name: this.cafe.name}]);
   }
 
   geoCafe() {
+
     this.router.navigate(['map']);
 
   }
