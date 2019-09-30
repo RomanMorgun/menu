@@ -4,7 +4,10 @@ export class Cafe {
     public id: number,
     public name: string,
     public logo: string,
-    public coordinates: any,
+    public position: {
+      lat: any;
+      lng: any;
+    },
     public address: string,
     public workTime: any,
     public telephone: string,

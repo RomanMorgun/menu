@@ -2,24 +2,12 @@
     <div class="imgCtn">
         <img src="../../../assets/selectAction.jpg" alt="">
     </div>
-
-    <div class="choosePageContent">
-        <div class="inputCtn">
-            <form [formGroup]="cityForm" (ngSubmit)="findCity()">
-                <ion-item>
-                    <ion-input formControlName="cityName" class="robotoRegGrey16" maxlength="20" (ionChange)="checkValidation()" type="text" placeholder="Введіть ваше місто"> </ion-input>
-                </ion-item>
-                <div class="buttonCtn">
-                    <ion-button type="submit" [disabled]="!cityForm.valid">Перейти на карту</ion-button>
-                </div>
-            </form>
-
-            <!--<ion-button>Перейти на карту</ion-button>-->
-        </div>
+    <div>
         <div class="optionsCtn">
-            <ion-button routerLink="/scan-qr">Сканувати код</ion-button>
-            <ion-button routerLink="/home">Переглянути кафе</ion-button>
-            <ion-button routerLink="/history">Історія</ion-button>
+            <ion-button routerLink="/map"><ion-icon name="map"></ion-icon></ion-button>
+            <ion-button routerLink="/scan-qr"><ion-icon name="qr-scanner"></ion-icon></ion-button>
+            <ion-button routerLink="/home"><ion-icon name="restaurant"></ion-icon></ion-button>
+            <ion-button routerLink="/history"><ion-icon name="filing"></ion-icon></ion-button>
         </div>
     </div>
 </div>

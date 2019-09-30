@@ -25,18 +25,18 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnChanges, OnDest
   constructor(private router: Router,
               private renderer: Renderer2,
               private menuService: MenuService) {
-    // this.currentUrl = this.router.url;
-    // console.log(this.currentUrl);
-    // router.events.subscribe(event => {
-    //   if (event instanceof NavigationEnd) {
-    //     this.previousUrl = this.currentUrl;
-    //     this.currentUrl = event.url;
-    //   }
-    //   console.log(this.previousUrl);
-    // });
-    // if (this.previousUrl) {
-    //   this.previousUrl = this.previousUrl.substring(1);
-    // }
+    this.currentUrl = this.router.url;
+    console.log(this.currentUrl);
+    router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        this.previousUrl = this.currentUrl;
+        this.currentUrl = event.url;
+      }
+      console.log(this.previousUrl);
+    });
+    if (this.previousUrl) {
+      this.previousUrl = this.previousUrl.substring(1);
+    }
 
   }
 
@@ -94,7 +94,7 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnChanges, OnDest
   }
 
   locationClick() {
-    console.log('location CLICK');
+    this.router.navigate(['map']);
   }
 
   cartClick() {

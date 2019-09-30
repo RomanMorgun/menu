@@ -7,7 +7,7 @@ export const COMMON_URL = {
   // get one should add cafe id to link
   cafe: {
     getAll: `${api}cafes`,
-    getOne: `${api}cafes/`
+    getOne: `${api}cafes`
   },
   // get one should add cafe id to link
   menu: {

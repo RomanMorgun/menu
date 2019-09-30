@@ -1,7 +1,11 @@
-import { Component, OnInit, Input } from '@angular/core';
+import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import { Cafe } from '../../shared/models/cafe.model';
 import { Router } from '@angular/router';
-import { formatDate } from '@angular/common';
+
+import {RouteParamService} from "../../shared/services/route-param.service";
+
+
+
 
 @Component({
   selector: 'app-cafe-item',
@@ -11,25 +15,30 @@ import { formatDate } from '@angular/common';
 export class CafeItemComponent implements OnInit {
   @Input() cafe: Cafe;
   @Input() currentDay: number;
-  public currentWorkTime: string;
-
-
-  constructor(private router: Router) { }
+  @Input() phone: number;
+  public workTime: any;
+  public coordinate: object;
+  constructor(private router: Router,
+              private routeParamService: RouteParamService,
+ ) { }
 
   ngOnInit() {
     console.log(this.cafe);
     console.log(this.currentDay);
+    this.workTime = this.cafe.workTime;
     // this.getCurrentDay();s
-  }
-
-  getCurrentWorkTime() {
-    return this.cafe.workTime[this.currentDay - 1];
   }
 
 
   selectCafe() {
     console.log(this.cafe.menuId);
     this.router.navigate(['menu',  {id: this.cafe.menuId, name: this.cafe.name, cafeId: this.cafe.id}]);
+  }
+
+  geoCafe() {
+
+    this.router.navigate(['map']);
+
   }
 
 }

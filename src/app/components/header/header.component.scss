@@ -38,7 +38,7 @@
       text-align: center;
       box-sizing: border-box;
       white-space: nowrap;
-      padding: 0 12px 15px 12px;
+      padding: 0 12px 12px 12px;
       &:first-child {
         padding-left: 12px;
       }
@@ -48,10 +48,13 @@
   .activeCategory {
     border-bottom: 2px solid $greenColor;
     transition: 0.1s;
-    color: #439dbb;
+    color: #634932;
   }
 
 }
-
+ion-button {
+  width: 40px;
+  height: 10%;
+}
 
 

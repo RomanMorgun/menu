@@ -11,7 +11,8 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
 import { Geolocation } from '@ionic-native/geolocation/ngx';
-
+import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
+import { GoogleMaps } from '@ionic-native/google-maps/ngx';
 // PAGES
 import { BasketPage } from './pages/basket/basket.page';
 // import { MapPage } from './pages/map/map.page';
@@ -34,41 +35,48 @@ import {CartService} from './shared/services/cart.service';
 import {DishService} from './shared/services/dish.service';
 import { CategoryService } from './shared/services/category.service';
 import { GeolocationService } from './shared/services/geolocation.service';
+import {MarkerCafeComponent} from './pages/map/marker-cafe/marker-cafe.component';
+
+import {ModalComponent} from './pages/map/modal/modal.component';
 
 
 @NgModule({
-  declarations: [ AppComponent,
-                  BasketPage,
-                  MenuPage,
-                  ChooseActionPage
+    declarations: [AppComponent,
+        BasketPage,
+        MenuPage,
+        ChooseActionPage,
+        MarkerCafeComponent,
+        ModalComponent
+    ],
+    entryComponents: [ModalComponent],
+    imports: [
+        BrowserModule,
+        IonicModule.forRoot(),
+        AppRoutingModule,
+        HttpClientModule,
+        SharedModule,
 
-  ],
-  entryComponents: [],
-  imports: [
-    BrowserModule,
-    IonicModule.forRoot(),
-    AppRoutingModule,
-    HttpClientModule,
-    SharedModule,
+    ],
 
-  ],
+    providers: [
+        StatusBar,
+        SplashScreen,
+        {provide: RouteReuseStrategy, useClass: IonicRouteStrategy},
+        {provide: HAMMER_GESTURE_CONFIG, useClass: IonicGestureConfig},
+        Geolocation,
+        RequestService,
+        CafeService,
+        MenuService,
+        CartService,
+        DishService,
+        CategoryService,
+        GeolocationService,
+        BarcodeScanner,
+        GoogleMaps,
 
-  providers: [
-    StatusBar,
-    SplashScreen,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    {provide: HAMMER_GESTURE_CONFIG, useClass: IonicGestureConfig},
-    Geolocation,
-    RequestService,
-    CafeService,
-    MenuService,
-    CartService,
-    DishService,
-    CategoryService,
-    GeolocationService
+    ],
 
-  ],
-  bootstrap: [AppComponent]
+    bootstrap: [AppComponent]
 })
 export class AppModule {}
 
