@@ -1,9 +1,7 @@
 @import "../../../theme/variables";
 
-
 .appHeader {
   .nameCtn {
-
     font-family: RobotoBold, sans-serif;
   }
 
@@ -15,18 +13,16 @@
       --icon-color: black;
       padding: 0;
     }
-
   }
 
   .slideMenu {
     display: flex;
-
     flex-wrap: nowrap;
     margin-top: 10px;
 
     overflow: scroll;
     min-width: 50px;
-    padding: 0 16px 0 4px;
+    padding: 0 4px;
     &::-webkit-scrollbar {
       width: 0;
       height: 0;
@@ -46,15 +42,25 @@
   }
 
   .activeCategory {
-    border-bottom: 2px solid $greenColor;
+    border-bottom: 2px solid var(--general--color);
     transition: 0.1s;
-    color: #634932;
+    color: var(--general--color);
   }
 
+  ion-button {
+    width: 40px;
+    height: 10%;
+  }
+
+  ion-segment-button {
+    --padding-start: 12px;
+    --padding-end: 12px;
+    --color-checked: var(--light--general--color);
+    --indicator-color-checked: var(--light--general--color);
+
+  }
 }
-ion-button {
-  width: 40px;
-  height: 10%;
-}
+
+
 
 

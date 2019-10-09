@@ -4,7 +4,8 @@ import {
   BarcodeScanner
 } from '@ionic-native/barcode-scanner/ngx';
 import {Router} from '@angular/router';
-import {QrService} from "../../shared/services/qr.service";
+import {QrService} from '../../shared/services/qr.service';
+
 @Component({
   selector: 'app-scan-qr',
   templateUrl: './scan-qr.page.html',
@@ -36,10 +37,11 @@ export class ScanQrPage implements OnInit {
           this.scannedData = barcodeData.text;
           this.qr.saveId(this.scannedData);
           console.log(barcodeData);
-            this.rt.navigate(['/selectAction']);
+          this.rt.navigate(['/selectAction']);
         })
         .catch(err => {
           console.log('Error', err);
+          this.rt.navigate(['/selectAction']);
         });
   }
 }

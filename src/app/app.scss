@@ -37,6 +37,10 @@ body {
   font-size: $fontSize18;
 }
 
+.w-100 {
+  width: 100%;
+}
+
 p {
   margin: 0;
   padding: 0;
@@ -138,6 +142,7 @@ ion-icon {
   font-size: $fontSize16;
   color: #737373;
 }
+
 .alert-wrapper {
   width: 100%;
   height: 20%;
@@ -146,6 +151,10 @@ ion-icon {
   transform: translateY(100) !important;
 }
 
+.button-native {
+  --padding-start: 14px !important;
+  --padding-end: 14px !important;
+}
 
 
 

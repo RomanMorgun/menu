@@ -2,9 +2,8 @@ import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import { Cafe } from '../../shared/models/cafe.model';
 import { Router } from '@angular/router';
 
-import {RouteParamService} from "../../shared/services/route-param.service";
-
-
+import { GeolocationService } from '../../shared/services/geolocation.service';
+import {RouteParamService} from '../../shared/services/route-param.service';
 
 
 @Component({
@@ -19,26 +18,26 @@ export class CafeItemComponent implements OnInit {
   public workTime: any;
   public coordinate: object;
   constructor(private router: Router,
+              private geoLocService: GeolocationService,
               private routeParamService: RouteParamService,
  ) { }
 
   ngOnInit() {
     console.log(this.cafe);
-    console.log(this.currentDay);
     this.workTime = this.cafe.workTime;
-    // this.getCurrentDay();s
+    // this.getCurrentDay();
   }
 
-
   selectCafe() {
-    console.log(this.cafe.menuId);
     this.router.navigate(['menu',  {id: this.cafe.menuId, name: this.cafe.name, cafeId: this.cafe.id}]);
   }
 
-  geoCafe() {
-
-    this.router.navigate(['map']);
-
+  geoCafe(cafePosition) {
+      const coordObj = {
+          lat: cafePosition[0],
+          lng: cafePosition[1]
+      };
+      console.log(JSON.stringify(coordObj));
+      this.router.navigate(['map', coordObj]);
   }
-
 }

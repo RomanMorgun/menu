@@ -1,24 +1,39 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-back-button defaultHref="{{previousUrl}}"></ion-back-button>
-    </ion-buttons>
-    <div class="inputCtn">
-        <ion-searchbar autocorrect="off" autocapitalize="off" spellcheck="off" placeholder="Search..." class="search-box" [(ngModel)]="searchbar"></ion-searchbar>
-        <button ion-button (click)="onButton()"><ion-icon name="search"></ion-icon></button>
-    </div>
-    <ion-button>
-      <ion-icon name="search"></ion-icon>
-    </ion-button>
+<ion-header class="map-page-header">
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <!--<ion-back-button defaultHref="{{previousUrl}}"></ion-back-button>-->
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
+        <div class="inputCtn w-100">
 
-  </ion-toolbar>
+            <ion-searchbar autocorrect="off"
+                           autocapitalize="off"
+                           spellcheck="off"
+                           #googleSearch
+                           placeholder="Search..."
+                           class="search-box w-100"
+                           (ionClear)="clearSearchArr($event)"
+                           (input)="updateSearchResults($event)"
+            >
+
+            </ion-searchbar>
+        </div>
+
+    </ion-toolbar>
 </ion-header>
 
 
-<ion-content>
-  <div class="wrapper">
-    <div id="map_canvas"></div>
-<!--    <app-marker-events></app-marker-events>-->
+<ion-content class="map-page-content">
+    <div class="search-ctn robotoMeduimClass15" [hidden]="autocompleteItems.length === 0">
+        <ion-list class="search-ctn__list" >
+            <ion-item button *ngFor="let item of autocompleteItems" tappable (click)="selectSearchResult(item)">
+                {{item.description}}
+            </ion-item>
+        </ion-list>
+    </div>
+    <div class="wrapper">
+        <div id="map_canvas"></div>
+        <!--    <app-marker-events></app-marker-events>-->
 
-  </div>
+    </div>
 </ion-content>

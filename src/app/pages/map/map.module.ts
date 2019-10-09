@@ -1,24 +1,25 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { Routes, RouterModule } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {FormsModule} from '@angular/forms';
+import {Routes, RouterModule} from '@angular/router';
 
-import { IonicModule } from '@ionic/angular';
+import {IonicModule} from '@ionic/angular';
 
-import { MapPage } from './map.page';
+import {MapPage} from './map.page';
 
-import {RouteParamService} from "../../shared/services/route-param.service";
-import {SharedModule} from "../../shared/shared.module";
-import {AgmCoreModule} from "@agm/core";
+import {RouteParamService} from '../../shared/services/route-param.service';
+import {SharedModule} from '../../shared/shared.module';
+import {AgmCoreModule} from '@agm/core';
 
-
+import {ModalComponent} from './modal/modal.component';
+import { GoogleMaps } from '@ionic-native/google-maps/ngx';
 
 
 const routes: Routes = [
-  {
-    path: '',
-    component: MapPage
-  }
+    {
+        path: '',
+        component: MapPage
+    }
 ];
 
 @NgModule({
@@ -26,7 +27,6 @@ const routes: Routes = [
         CommonModule,
         FormsModule,
         IonicModule,
-
         RouterModule.forChild(routes),
         SharedModule,
         AgmCoreModule.forRoot({
@@ -34,8 +34,13 @@ const routes: Routes = [
             libraries: ['places'],
         }),
     ],
-  declarations: [MapPage],
-  providers: [ RouteParamService ],
+    declarations: [
+        MapPage,
+        ModalComponent
+    ],
+    entryComponents: [ModalComponent],
+    providers: [RouteParamService, GoogleMaps],
 
 })
-export class MapPageModule {}
+export class MapPageModule {
+}

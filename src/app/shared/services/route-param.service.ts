@@ -1,7 +1,7 @@
 import {EventEmitter, Injectable} from '@angular/core';
 import {Location} from '@angular/common';
-import {BehaviorSubject} from "rxjs";
-import {HttpClient} from "@angular/common/http";
+import {BehaviorSubject} from 'rxjs';
+import {HttpClient} from '@angular/common/http';
 
 
 @Injectable({

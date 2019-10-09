@@ -20,9 +20,8 @@ export class RequestService {
 
   public get(url: string, params = null): Observable<any> {
     console.log(params);
-    let httpParams = new HttpParams();
 
-    return this.http.get(url, {params: httpParams}).pipe(
+    return this.http.get(url, {...params}).pipe(
       tap(() => {
 
       }, (error) => {

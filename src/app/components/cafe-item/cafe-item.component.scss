@@ -1,10 +1,8 @@
 @import "../../../theme/variables";
 
 .cafeItem {
-  //padding: 10px 16px;
   padding: 0 16px 10px 16px;
-  //border-top: 1px solid #d1d1d1;
-  border-bottom: 1px solid #d1d1d1;
+  border-bottom: 1px solid $bottomBorder;
   min-height: 100px;
   display: flex;
   justify-content: space-between;
@@ -12,8 +10,8 @@
 
   .cafeLogo {
     display: flex;
-    align-items: center;
-    width: 30%;
+    //align-items: center;
+    width: 35%;
     //min-height: 100%;
     margin-right: 10px;
 
@@ -26,26 +24,14 @@
   .cafeData {
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
-    //color: $lightGrey;
+    justify-content: space-between;
     width: 65%;
 
     &__item {
-      //color: $lightGrey;
       display: flex;
       flex-direction: row;
       justify-content: space-between;
-
-      &--staticText {
-
-        // color: #37491e;
-      }
-
-      &--name {
-        //font-family: RobotoMedium, sans-serif;
-        //font-size: $fontSize18;
-        //color: $lightDark;
-      }
+      argin-bottom: 4px;
 
       &--timeWork {
         display: flex;
@@ -56,11 +42,7 @@
         &--list {
           white-space: nowrap;
         }
-      ;
       }
-
-      margin: 4px 0;
-
       &:first-child {
         margin-top: 0;
       }
@@ -73,13 +55,6 @@
     &__info {
       //color: $lightGrey;
       display: flex;
-      flex-direction: row;
-      justify-content: space-around;
-
-      &--staticText {
-
-        // color: #37491e;
-      }
 
       &--timeWork {
         display: flex;

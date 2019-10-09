@@ -22,6 +22,9 @@ export class AppComponent {
 
   initializeApp() {
     this.platform.ready().then(() => {
+      // this.platform.backButton.subscribeWithPriority(9999, () => {
+      //   console.log('adwad');
+      // });
       this.geolocation.getPosition();
       this.statusBar.styleDefault();
       this.splashScreen.hide();

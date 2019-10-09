@@ -1,10 +1,8 @@
 import { Cafe } from '../models/cafe.model';
 import { Injectable } from '@angular/core';
 import { COMMON_URL } from './common.url';
-import {catchError, tap} from 'rxjs/internal/operators';
+import {tap} from 'rxjs/internal/operators';
 import {Observable, Subject} from 'rxjs/index';
-// import { Observable } from 'rxjs/index';
-// import { HttpClient } from '@angular/common/http';
 
 import { RequestService } from './request.service';
 import { GeolocationService } from './geolocation.service';
@@ -51,22 +49,17 @@ export class CafeService {
   //   )
   // ];
 
-  setCafes(cafes: Cafe[]) {
+  setCafes(cafes: Cafe[]): void {
     this.cafes = cafes;
   }
 
 
-  returnCafesValue() {
+  returnCafesValue(): Cafe[] {
     return this.cafes.slice();
   }
 
-  getAllCafes(): Observable<any> {
-    let params: any;
-    if (this.geolocationService.currentGeolocation.lat !== null) {
-      params = this.geolocationService.currentGeolocation;
-      console.log(params);
-    }
-    return this.requestService.get(`${COMMON_URL.cafe.getAll}`).pipe(
+  getAllCafes(params: object = {}): Observable<any> {
+    return this.requestService.get(`${COMMON_URL.cafe.getAll}`, {...params}).pipe(
       tap( (result) => {
         this.setCafes(result.data);
         console.log('Get Cafes okey');
@@ -76,9 +69,10 @@ export class CafeService {
     );
   }
 
-  getOneCafe(id) {
+  getOneCafe(id): Observable<any> {
     return this.requestService.get(`${COMMON_URL.cafe.getOne}/${ id }`);
   }
+
   getZoneCafe( obj: any): Observable<any> {
     return this.requestService.get(`${COMMON_URL.cafe.getAll}`, {obj});
   }

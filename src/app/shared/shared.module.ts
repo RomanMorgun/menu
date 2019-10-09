@@ -1,10 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
-
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
 
 // ----- COMPONENTS ------
 import { BasketItemComponent } from '../components/basket-item/basket-item.component';
@@ -14,11 +12,13 @@ import { HeaderComponent } from '../components/header/header.component';
 import { DishesListComponent } from '../components/dishes-list/dishes-list.component';
 
 // ----- SERVICES ------
-
-
-import { DishListDirective } from '../components/dishes-list/dish-list.directive';
-
-// ----- MODELS ------
+import { RequestService } from './services/request.service';
+import { CafeService } from './services/cafe.service';
+import { MenuService } from './services/menu.service';
+import { CartService } from './services/cart.service';
+import { DishService } from './services/dish.service';
+import { CategoryService } from './services/category.service';
+import { GeolocationService } from './services/geolocation.service';
 
 @NgModule({
   imports: [
@@ -33,8 +33,7 @@ import { DishListDirective } from '../components/dishes-list/dish-list.directive
     CafeItemComponent,
     DishItemComponent,
     HeaderComponent,
-    DishesListComponent,
-    DishListDirective
+    DishesListComponent
   ],
   exports: [
     BasketItemComponent,
@@ -44,10 +43,18 @@ import { DishListDirective } from '../components/dishes-list/dish-list.directive
     DishesListComponent,
     CommonModule,
     FormsModule,
-    ReactiveFormsModule,
-    DishListDirective
-
+    ReactiveFormsModule
+  ],
+  providers: [
+    RequestService,
+    CafeService,
+    MenuService,
+    CartService,
+    DishService,
+    CategoryService,
+    GeolocationService
   ]
+
 })
 
 

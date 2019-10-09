@@ -1,10 +1,83 @@
-<app-header #menuHeader [name]="cafeName" [categories]="categories" (searchValue)="searchDishes($event)" (dishes)="setCurrentDishes($event)"></app-header>
-
-
+<app-header #menuHeader
+            [name]="cafeName"
+            [index]="index"
+            [categories]="categories"
+            (catSelectedId)="changeSlide($event)"
+            (searchValue)="searchDishes($event)"
+            (dishes)="setCurrentDishes($event)"></app-header>
 
 
 <ion-content no-padding>
-  <app-dishes-list  [dishes]="currentDishes" appDishListDirective  *ngIf="currentDishes"></app-dishes-list>
+
+  <ion-slides #slides [options]="sliderOptions" (ionSlideDidChange)="slideChanged($event)">
+    <ion-slide *ngFor="let page of categories; let i = index">
+      <div class="dish-ctn" *ngFor="let dish of page?.dishes">
+        <div class="dishImage" *ngIf="dish.image">
+          <img [src]="dish.image" alt="">
+        </div>
+        <div class="dishName">
+          <div class="dishName__name robotoMeduimClasss20">
+
+            <span>{{dish.name}}</span>
+          </div>
+          <div class="dishName__price robotoMeduimClass20">
+            <span>{{dish.price}}</span>
+            <span> грн</span>
+          </div>
+        </div>
+        <div class="dishDescription robotoRegGrey16">
+          <!--<span>{{dish.description}}</span>-->
+          <span>{{dish.description}}</span>
+        </div>
+
+        <div class="IngredientsAndButton">
+          <!--<div *ngIf="dish.ingredients.length" class="showIngred ">-->
+            <!--<span class="robotoRegularClass18" (click)="showDetailInfo(dish.id)">Більш детально: </span>-->
+          <!--</div>-->
+          <div class="changeAmount">
+            <ion-button size="small" class="removeBtn robotoRegGrey" (click)="addToCart(dish, dish.id, 'remove')" *ngIf="dish.count > 0">
+              <span>-</span>
+            </ion-button>
+            <span class="changeAmount__counter robotoRegGrey" *ngIf="dish.count > 0">{{dish.count}}</span>
+            <ion-button size="small" class="addBtn robotoRegGrey" (click)="addToCart(dish, dish.id, 'add')">
+              <span>+</span>
+            </ion-button>
+          </div>
+        </div>
+
+        <div class="hide" [ngClass]="{'show': dish.open}">
+          <div class="ingredients robotoMeduimClass15">
+            <div class="ingredientsItem" *ngFor="let ingredient of dish.ingredients; let i = index">
+              <ion-checkbox [(ngModel)]="ingredient.included" (ionChange)="changeIngridient($event)"></ion-checkbox>
+              <ion-label>
+                <span>{{ingredient.name }} </span>
+                <span>{{ingredient.price }}</span>
+                <span>грн</span>
+              </ion-label>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </ion-slide>
+  </ion-slides>
+
+  <!--<app-dishes-list  [dishes]="currentDishes"-->
+  <!--*ngIf="currentDishes"></app-dishes-list>-->
+</ion-content>
+
+
+
+
+
+
+<!--<app-header #menuHeader [name]="cafeName" [categories]="categories" (searchValue)="searchDishes($event)" (dishes)="setCurrentDishes($event)"></app-header>-->
+
+
+
+
+<!--<ion-content no-padding>-->
+  <!--<app-dishes-list  [dishes]="currentDishes" appDishListDirective  *ngIf="currentDishes"></app-dishes-list>-->
 
 
   <!--<ion-list *ngFor="let item of info; let i = index" class="accordion-list" lines="none" detail="false" no-padding>-->
@@ -35,5 +108,5 @@
       <!--</div>-->
     <!--</div>-->
   <!--</div>-->
-</ion-content>
+<!--</ion-content>-->
 
