@@ -1,156 +1,109 @@
 import {
-    Component,
-    OnInit,
-    Input,
-    Output,
-    EventEmitter,
-    AfterViewInit,
-    Renderer2,
-    OnChanges,
-    SimpleChanges,
-    OnDestroy
+  Component,
+  OnInit,
+  Input,
+  Output,
+  EventEmitter,
+  OnDestroy
 } from '@angular/core';
 import {Category} from '../../shared/models/category.model';
 import {Dish} from '../../shared/models/dish.model';
-import {Router, NavigationEnd} from '@angular/router';
+import {Router} from '@angular/router';
 import {MenuService} from '../../shared/services/menu.service';
+import {CategoryService} from '../../shared/services/category.service';
+import {Subscription} from 'rxjs/index';
 
 
 @Component({
-    selector: 'app-header',
-    templateUrl: './header.component.html',
-    styleUrls: ['./header.component.scss'],
+  selector: 'app-header',
+  templateUrl: './header.component.html',
+  styleUrls: ['./header.component.scss'],
 })
-export class HeaderComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy {
-    @Input() name: string;
-    @Input() categories: Category[];
-    @Input() index: number;
-    @Output() searchValue = new EventEmitter<string>();
-    @Output() catSelectedId = new EventEmitter<any>();
-    @Output() dishes = new EventEmitter<Dish[]>();
+export class HeaderComponent implements OnInit, OnDestroy {
+  @Input() name: string;
+  @Input() categories: Category[];
+  @Output() searchValue = new EventEmitter<string>();
+  @Output() catSelectedId = new EventEmitter<any>();
+  @Output() dishes = new EventEmitter<Dish[]>();
 
-    public nameHide = false;
-    private menuItems: any;
-    public previousUrl: string;
-    private currentUrl: string;
-    public currentDishes: Dish[];
-    public activeCatId: number;
+  public nameHide = false;
+  public previousUrl: string;
+  private currentUrl: string;
+  public currentDishes: Dish[];
+  public activeCatId: number;
+  private changeCatSub: Subscription;
+  private navNumber: Subscription;
+  public  segmentNum = 0;
 
-    constructor(private router: Router,
-                private renderer: Renderer2,
-                private menuService: MenuService) {
-        this.currentUrl = this.router.url;
-        console.log(this.currentUrl);
-        router.events.subscribe(event => {
-            if (event instanceof NavigationEnd) {
-                this.previousUrl = this.currentUrl;
-                this.currentUrl = event.url;
-            }
+  constructor(private router: Router,
+              private catService: CategoryService,
+              public menuService: MenuService) {
 
-        });
-        if (this.previousUrl) {
-            this.previousUrl = this.previousUrl.substring(1);
-        }
-
-    }
-
-    ngOnInit() {
-        this.subcribeToChangeCat();
-    }
-
-    ngAfterViewInit() {
-
-    }
-
-
-    ngOnChanges(changes: SimpleChanges) {
-        // console.log(changes);
-        // console.log(this.categories);
-        this.setFirstCategory();
-    }
-
-
-    subcribeToChangeCat() {
-        this.menuService.swipeDirection.subscribe((result) => {
-            console.log(result);
-            this.changeCatFromSwipe(result);
-        });
-    }
-
-    changeCatFromSwipe(swipeDirection: string): void {
-        if (this.categories) {
-            const index = this.categories.findIndex((category: Category) => {
-                return category.id === this.activeCatId;
-            });
-            if (swipeDirection === 'left' && index !== 0) {
-                this.selectCategory(this.categories[index - 1].id);
-            } else if (swipeDirection === 'right' && index !== this.categories.length - 1) {
-                this.selectCategory(this.categories[index + 1].id);
-            }
-            console.log(index);
-        }
-
-    }
-
-    setFirstCategory() {
-        if (this.categories) {
-            this.activeCatId = this.categories[0].id;
-            this.selectCategory(this.activeCatId);
-            console.log(this.categories);
-        }
-    }
-
-
-    searchClick() {
-        this.nameHide === false ? this.nameHide = true : this.nameHide = false;
-        console.log('search CLICK');
-    }
-
-    locationClick() {
-        this.router.navigate(['map']);
-    }
-
-    cartClick() {
-        console.log('cart CLICK');
-    }
-
-    searchCafe(event) {
-        const searchValue = event.target.value;
-        this.searchValue.emit(searchValue);
-    }
-
-    clearClick(event) {
-        event.target.value = '';
-        this.searchCafe(event);
-    }
-
-    selectCategory(categoryId) {
-        console.log(categoryId);
-        this.activeCatId = categoryId;
-        this.categories.map(cat => {
-            if (cat.id === categoryId) {
-                this.currentDishes = cat.dishes;
-                this.dishes.emit(this.currentDishes);
-            }
-        });
-    }
-
-    ngOnDestroy() {
-        this.menuService.swipeDirection.unsubscribe();
-    }
-
-    onSegmentChange(ev) {
-        this.catSelectedId.emit(ev.detail.value);
-        // this.slideTo(ev.detail.value);
-    }
-
-    // selectCategory(event, category) {
-    //   this.menuItems.forEach(element => {
-    //     this.renderer.removeClass(element, 'activeCategory');
-    //   });
-    //   this.renderer.addClass(event.target, 'activeCategory');
-    //   this.menuService.selectCategory(category);
-    //   this.currentDishes = category.dishes;
+    // this.currentUrl = this.router.url;
+    // console.log(this.currentUrl);
+    // router.events.subscribe(event => {
+    //   if (event instanceof NavigationEnd) {
+    //     this.previousUrl = this.currentUrl;
+    //     this.currentUrl = event.url;
+    //   }
+    //
+    // });
+    // if (this.previousUrl) {
+    //   this.previousUrl = this.previousUrl.substring(1);
     // }
+  }
+
+  ngOnInit() {
+    this.subscibeToNavNum();
+  }
+
+  subscibeToNavNum() {
+    this.navNumber = this.menuService.navigationNumber.subscribe((res) => {
+      this.segmentNum = res;
+    });
+  }
+
+  searchClick() {
+    this.nameHide === false ? this.nameHide = true : this.nameHide = false;
+    console.log('search CLICK');
+  }
+
+  locationClick() {
+    this.router.navigate(['map']);
+  }
+
+  cartClick() {
+    console.log('cart CLICK');
+  }
+
+  searchCafe(event) {
+    const searchValue = event.target.value;
+    this.searchValue.emit(searchValue);
+  }
+
+  clearClick(event) {
+    event.target.value = '';
+    this.searchCafe(event);
+  }
+
+  selectCategory(categoryNum) {
+    console.log(categoryNum);
+    // this.catSelectedId.emit(categoryNum);
+  }
+
+  ngOnDestroy() {
+    this.unSubscribeAll();
+  }
+
+  onSegmentChange(ev) {
+    this.menuService.changeNavPos(ev.detail.value);
+  }
+
+  unSubscribeAll() {
+    // this.changeCatSub
+    this.changeCatSub.unsubscribe();
+    // this.changeCatSub;
+    // this.catService.newCatEvent.unsubscribe();
+  }
 
 }

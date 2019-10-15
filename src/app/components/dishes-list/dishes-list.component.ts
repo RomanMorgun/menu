@@ -19,8 +19,6 @@ export class DishesListComponent implements OnInit, OnChanges {
 
   @Input() dishes: Dish[];
 
-  @Output() swipeEvent = new EventEmitter<any>();
-
   constructor(private menuService: MenuService,
               private activateRouter: ActivatedRoute,
               private cartService: CartService) { }
@@ -40,13 +38,13 @@ export class DishesListComponent implements OnInit, OnChanges {
 
   swipeLeft(event) {
     console.log('swipe Left');
-    this.menuService.swipeDirection.emit('right');
+    // this.menuService.swipeDirection.emit('right');
     // this.menuService.changeCategory('left');
   }
 
   swipeRight(event) {
     console.log('swipe Right');
-    this.menuService.swipeDirection.emit('left');
+    // this.menuService.swipeDirection.emit('left');
     // this.menuService.changeCategory('right');
   }
 

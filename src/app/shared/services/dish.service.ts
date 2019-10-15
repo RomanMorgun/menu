@@ -11,9 +11,8 @@ export class DishService {
     const dishArray = [];
     dishArray.push(new Dish());
     return dishArray;
-    // console.log(this.dishes);
-    // return this.dishes.slice();
   }
+
   setDishes(dishes: Dish[]) {
     this.dishes = dishes;
   }

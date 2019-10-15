@@ -3,6 +3,17 @@
 }
 
 .map-page-content {
+  position: relative;
+
+  .custom-search-btn {
+    ion-icon {
+      color: white;
+    }
+    position: absolute;
+    right: 0;
+    top: 10px;
+    z-index: 100;
+  }
   .search-ctn {
     background: white;
     position: absolute;

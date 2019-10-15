@@ -1,15 +1,13 @@
 <app-header #menuHeader
             [name]="cafeName"
-            [index]="index"
             [categories]="categories"
-            (catSelectedId)="changeSlide($event)"
             (searchValue)="searchDishes($event)"
             (dishes)="setCurrentDishes($event)"></app-header>
 
-
+<!--(catSelectedId)="changeSlide($event)"-->
 <ion-content no-padding>
 
-  <ion-slides #slides [options]="sliderOptions" (ionSlideDidChange)="slideChanged($event)">
+  <ion-slides #slides [options]="sliderOptions" (ionSlideDillChange)="slideChanged($event); slides.update()">
     <ion-slide *ngFor="let page of categories; let i = index">
       <div class="dish-ctn" *ngFor="let dish of page?.dishes">
         <div class="dishImage" *ngIf="dish.image">

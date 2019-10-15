@@ -69,6 +69,11 @@ export class CafeService {
     );
   }
 
+  getCafesByCoords(coords): Observable<any> {
+      console.log(coords);
+      return this.requestService.getForCafes(`${COMMON_URL.cafe.getAll}`, coords);
+  }
+
   getOneCafe(id): Observable<any> {
     return this.requestService.get(`${COMMON_URL.cafe.getOne}/${ id }`);
   }

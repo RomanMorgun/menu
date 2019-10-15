@@ -1,13 +1,17 @@
 import { Category } from '../models/category.model';
-import { Injectable } from '@angular/core';
+import {EventEmitter, Injectable} from '@angular/core';
 import { DishService } from './dish.service';
-import { Dish } from '../../shared/models/dish.model';
+import { Dish } from '../models/dish.model';
+import { MenuService } from './menu.service';
 
 @Injectable()
 
 export class CategoryService {
+
   private categories: Category[];
-  constructor(private dishService: DishService) {}
+
+  constructor(private dishService: DishService,
+              private menuService: MenuService) {}
 
 
   getOneCategory() {
@@ -22,14 +26,16 @@ export class CategoryService {
 
   saveToSearchCat(dishes: Dish[]) {
     if (!this.findSearchCategory()) {
-      this.addNewCategory();
+      this.addNewCategory(dishes);
     }
-    this.categories[this.categories.length - 1].dishes = dishes;
-    console.log(this.categories);
+
   }
 
-  addNewCategory() {
+  addNewCategory(dishes: Dish[]) {
+    console.log(this.categories.length);
     this.categories.push(this.getOneCategory());
+    this.categories[this.categories.length - 1].dishes = dishes;
+    this.menuService.changeNavPos(this.categories.length - 1);
   }
 
   removeSearchCategory() {
