@@ -38,19 +38,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
   constructor(private router: Router,
               private catService: CategoryService,
               public menuService: MenuService) {
-
-    // this.currentUrl = this.router.url;
-    // console.log(this.currentUrl);
-    // router.events.subscribe(event => {
-    //   if (event instanceof NavigationEnd) {
-    //     this.previousUrl = this.currentUrl;
-    //     this.currentUrl = event.url;
-    //   }
-    //
-    // });
-    // if (this.previousUrl) {
-    //   this.previousUrl = this.previousUrl.substring(1);
-    // }
   }
 
   ngOnInit() {
@@ -59,6 +46,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   subscibeToNavNum() {
     this.navNumber = this.menuService.navigationNumber.subscribe((res) => {
+      console.log('number',res);
       this.segmentNum = res;
     });
   }

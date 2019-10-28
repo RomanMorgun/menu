@@ -27,7 +27,7 @@ export class GeolocationService {
     getCurrentPos() {
         const lat = window.localStorage.getItem('lat');
         const lng = window.localStorage.getItem('lng');
-        if (lat && lng) {
+        if (lat && lng && !this._currentGeolocation.lat) {
             this.setCurrentPos(lat, lng);
         }
         return this._currentGeolocation;
@@ -35,9 +35,8 @@ export class GeolocationService {
 
     getPosition(): Promise<object> {
         return new Promise((resolve) => {
-            if (this.getCurrentPos() &&
-                this.getCurrentPos().lat &&
-                this.getCurrentPos().lng) {
+            if (this._currentGeolocation.lat &&
+                this._currentGeolocation.lng) {
                 resolve(this.getCurrentPos());
             } else {
                 this.geolocation.getCurrentPosition().then((result) => {

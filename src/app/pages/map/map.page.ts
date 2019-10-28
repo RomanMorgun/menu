@@ -51,7 +51,7 @@ export class MapPage implements OnInit, OnDestroy {
               public cafeService: CafeService,
               private router: Router,
               private ngZone: NgZone,
-              public modalController: ModalController,) {
+              public modalController: ModalController) {
   }
 
   ngOnInit() {

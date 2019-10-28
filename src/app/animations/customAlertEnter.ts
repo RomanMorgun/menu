@@ -24,7 +24,6 @@ export function customModalEnter(AnimationC: Animation, baseEl: HTMLElement): Pr
         .add(wrapperAnimation));
 }
 
-
 export function myLeaveAnimation(AnimationC: Animation, baseEl: HTMLElement): Promise<Animation> {
 
     const baseAnimation = new AnimationC();

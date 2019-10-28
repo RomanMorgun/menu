@@ -120,7 +120,6 @@ export class MenuPage implements OnInit, OnDestroy {
           console.log('slides length after ' + res2);
         });
         this.menuService.changeNavPos(0);
-
       });
 
     } else if (event !== '') {
@@ -139,8 +138,7 @@ export class MenuPage implements OnInit, OnDestroy {
   }
 
   async slideChanged(ev) {
-    let currentIndex = this.slides.getActiveIndex();
-    this.menuService.changeNavPos(+currentIndex);
+    this.slides.getActiveIndex().then( index => this.menuService.changeNavPos(index));
     this.updateSlide().then((re1) => {
       console.log(re1);
       this.slides.length().then((res) => {
