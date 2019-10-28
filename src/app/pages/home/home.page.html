@@ -1,10 +1,12 @@
-<app-header [name] = "appName" (searchValue)="searchCafe($event)"></app-header>
+<app-header [name]="appName"
+            (searchValue)="searchCafe($event)">
+</app-header>
 
 <ion-content>
-  <div class="content">
-    <app-cafe-item *ngFor="let cafe of cafes" [currentDay] = currentDay [cafe] = cafe></app-cafe-item>
-  </div>
-
-
-
+    <div class="content">
+        <app-cafe-item *ngFor="let cafe of cafes"
+                       [currentDay]="currentDay"
+                       [cafe]="cafe"></app-cafe-item>
+      <div *ngIf="!cafes || !cafes.length">Нічого не знайдено</div>
+    </div>
 </ion-content>

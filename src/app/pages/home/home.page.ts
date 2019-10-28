@@ -9,7 +9,6 @@ import {GeolocationService} from '../../shared/services/geolocation.service';
   styleUrls: ['./home.page.scss'],
 })
 
-
 export class HomePage implements  OnInit {
   public appName = 'AppName';
   public cafes: Cafe[];
@@ -31,10 +30,7 @@ export class HomePage implements  OnInit {
   }
 
   getAllCafes() {
-    const coord = {
-      lat: this.geolocationService.currentGeolocation.lat,
-      lng: this.geolocationService.currentGeolocation.lng
-    };
+    const coord = this.geolocationService.getCurrentPos();
     console.log('coordinates', coord);
     this.cafeService.getCafesByCoords(coord).subscribe( (result) => {
       this.getCafes();

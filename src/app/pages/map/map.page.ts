@@ -140,8 +140,8 @@ export class MapPage implements OnInit, OnDestroy {
           this.cameraPosition(this.cafeCoordinate);
         } else if (this.coordinateHist) {
           // this.cameraPosition(this.coordinateHist);
-        } else if (this.geoLocService.currentGeolocation) {
-          this.cameraPosition(this.geoLocService.currentGeolocation);
+        } else if (this.geoLocService.getCurrentPos().lat) {
+          this.cameraPosition(this.geoLocService.getCurrentPos());
           // find out the current location device position
         } else {
           this.geoLocService.getPosition().then((res) => {

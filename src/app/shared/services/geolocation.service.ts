@@ -10,10 +10,9 @@ import {Geocoder, GeocoderRequest, GeocoderResult} from '@ionic-native/google-ma
 export class GeolocationService {
 
     constructor(private geolocation: Geolocation) {
-        console.log('created geolocation service');
     }
 
-    public currentGeolocation = {
+    public _currentGeolocation = {
         lat: null,
         lng: null
     };
@@ -21,8 +20,8 @@ export class GeolocationService {
     setCurrentPos(lat, lng) {
         window.localStorage.setItem('lat', lat);
         window.localStorage.setItem('lng', lng);
-        this.currentGeolocation.lat = lat;
-        this.currentGeolocation.lng = lng;
+        this._currentGeolocation.lat = lat;
+        this._currentGeolocation.lng = lng;
     }
 
     getCurrentPos() {
@@ -31,18 +30,20 @@ export class GeolocationService {
         if (lat && lng) {
             this.setCurrentPos(lat, lng);
         }
-        return this.currentGeolocation;
+        return this._currentGeolocation;
     }
 
     getPosition(): Promise<object> {
         return new Promise((resolve) => {
-            if (this.currentGeolocation && this.currentGeolocation.lat && this.currentGeolocation.lng) {
-                resolve(this.currentGeolocation);
+            if (this.getCurrentPos() &&
+                this.getCurrentPos().lat &&
+                this.getCurrentPos().lng) {
+                resolve(this.getCurrentPos());
             } else {
                 this.geolocation.getCurrentPosition().then((result) => {
                     this.setCurrentPos(result.coords.latitude, result.coords.longitude);
-                    console.log('current position', this.currentGeolocation);
-                    resolve(this.currentGeolocation);
+                    console.log('current position', this.getCurrentPos());
+                    resolve(this.getCurrentPos());
                 }).catch((error) => {
                     console.warn(error);
                 });
