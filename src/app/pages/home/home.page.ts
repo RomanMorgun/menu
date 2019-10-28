@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Cafe } from '../../shared/models/cafe.model';
 import { CafeService } from '../../shared/services/cafe.service';
-
+import {GeolocationService} from '../../shared/services/geolocation.service';
 
 @Component({
   selector: 'app-home',
@@ -17,7 +17,8 @@ export class HomePage implements  OnInit {
   public currentDay: number;
 
   constructor(
-    private cafeService: CafeService
+    private cafeService: CafeService,
+    private geolocationService: GeolocationService
   ) {}
 
   ngOnInit() {
@@ -29,9 +30,13 @@ export class HomePage implements  OnInit {
     this.currentDay = new Date().getDay();
   }
 
-
   getAllCafes() {
-    this.cafeService.getAllCafes().subscribe( (result) => {
+    const coord = {
+      lat: this.geolocationService.currentGeolocation.lat,
+      lng: this.geolocationService.currentGeolocation.lng
+    };
+    console.log('coordinates', coord);
+    this.cafeService.getCafesByCoords(coord).subscribe( (result) => {
       this.getCafes();
     });
   }

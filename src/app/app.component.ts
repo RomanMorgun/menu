@@ -15,7 +15,7 @@ export class AppComponent {
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
-    private geolocation: GeolocationService
+    private geolocationSvc: GeolocationService
   ) {
     this.initializeApp();
   }
@@ -25,7 +25,7 @@ export class AppComponent {
       // this.platform.backButton.subscribeWithPriority(9999, () => {
       //   console.log('adwad');
       // });
-      this.geolocation.getPosition();
+      this.geolocationSvc.getPosition().then( res => {});
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });

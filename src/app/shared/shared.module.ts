@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { NgModule } from '@angular/core';
+import {ModuleWithProviders, NgModule} from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -44,18 +44,22 @@ import { GeolocationService } from './services/geolocation.service';
     CommonModule,
     FormsModule,
     ReactiveFormsModule
-  ],
-  providers: [
-    RequestService,
-    CafeService,
-    MenuService,
-    CartService,
-    DishService,
-    CategoryService,
-    GeolocationService
   ]
-
 })
 
-
-export class SharedModule { }
+export class SharedModule {
+  static forRoot(): ModuleWithProviders {
+    return {
+      ngModule: SharedModule,
+      providers: [
+      RequestService,
+      CafeService,
+      MenuService,
+      CartService,
+      DishService,
+      CategoryService,
+      GeolocationService
+    ]
+    };
+  }
+}

@@ -5,21 +5,20 @@ import { RouterModule } from '@angular/router';
 import { SharedModule } from '../../shared/shared.module';
 
 import { HomePage } from './home.page';
+
 // CommonModule,
 @NgModule({
   declarations: [HomePage],
   imports: [
-
     SharedModule,
-
     IonicModule,
     RouterModule.forChild([
       {
         path: '',
         component: HomePage
       }
-    ]),
-
-  ]
+    ])
+  ],
+  exports: [RouterModule]
 })
 export class HomePageModule {}

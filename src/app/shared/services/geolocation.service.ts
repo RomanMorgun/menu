@@ -1,14 +1,16 @@
 import {Injectable} from '@angular/core';
 import {Platform} from '@ionic/angular';
 import {Geolocation} from '@ionic-native/geolocation/ngx';
-import { GoogleMaps } from '@ionic-native/google-maps';
+import {GoogleMaps} from '@ionic-native/google-maps';
 import {Geocoder, GeocoderRequest, GeocoderResult} from '@ionic-native/google-maps';
 
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+})
 export class GeolocationService {
 
-
     constructor(private geolocation: Geolocation) {
+        console.log('created geolocation service');
     }
 
     public currentGeolocation = {
@@ -16,16 +18,30 @@ export class GeolocationService {
         lng: null
     };
 
+    setCurrentPos(lat, lng) {
+        window.localStorage.setItem('lat', lat);
+        window.localStorage.setItem('lng', lng);
+        this.currentGeolocation.lat = lat;
+        this.currentGeolocation.lng = lng;
+    }
+
+    getCurrentPos() {
+        const lat = window.localStorage.getItem('lat');
+        const lng = window.localStorage.getItem('lng');
+        if (lat && lng) {
+            this.setCurrentPos(lat, lng);
+        }
+        return this.currentGeolocation;
+    }
+
     getPosition(): Promise<object> {
         return new Promise((resolve) => {
-            if (this.currentGeolocation) {
+            if (this.currentGeolocation && this.currentGeolocation.lat && this.currentGeolocation.lng) {
                 resolve(this.currentGeolocation);
             } else {
                 this.geolocation.getCurrentPosition().then((result) => {
-                    const geoResult = result;
-                    this.currentGeolocation.lat = geoResult.coords.latitude;
-                    this.currentGeolocation.lng = geoResult.coords.longitude;
-                    console.log(this.currentGeolocation);
+                    this.setCurrentPos(result.coords.latitude, result.coords.longitude);
+                    console.log('current position', this.currentGeolocation);
                     resolve(this.currentGeolocation);
                 }).catch((error) => {
                     console.warn(error);

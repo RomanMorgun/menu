@@ -101,7 +101,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   unSubscribeAll() {
     // this.changeCatSub
-    this.changeCatSub.unsubscribe();
+    if(this.changeCatSub && this.changeCatSub.unsubscribe) this.changeCatSub.unsubscribe();
     // this.changeCatSub;
     // this.catService.newCatEvent.unsubscribe();
   }

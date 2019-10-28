@@ -26,6 +26,7 @@ const routes: Routes = [
         RouterModule.forChild(routes),
         SharedModule,
     ],
+    exports: [RouterModule],
     declarations: [MenuPage],
     providers: [Geocoder]
 })

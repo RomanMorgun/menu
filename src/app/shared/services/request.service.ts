@@ -13,26 +13,16 @@ export class RequestService {
   constructor(private http: HttpClient) {}
 
   public errorHandler(error: HttpErrorResponse) {
-
     return throwError('Error Message');
   }
 
   // TODO install Interceptor and set request retry for error
 
   public getForCafes(url: string, params): Observable<any> {
-    console.log(params);
-    const httpParams = new HttpParams();
-    const northeast = Object.values(params.northeast);
-    northeast.map( e => {
-      console.log(e);
-      httpParams.set('northeast', `${e}`);
-    });
-    console.log(httpParams);
-
-
-    return this.http.get(url, {params: httpParams}).pipe(
+   // const httpParams = new HttpParams();
+   // const northeast = Object.values(params.northeast);
+    return this.http.get(url, {params}).pipe(
       tap(() => {
-
       }, (error) => {
         console.log(error);
       })

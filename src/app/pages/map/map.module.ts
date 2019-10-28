@@ -9,11 +9,9 @@ import {MapPage} from './map.page';
 
 import {RouteParamService} from '../../shared/services/route-param.service';
 import {SharedModule} from '../../shared/shared.module';
-import {AgmCoreModule} from '@agm/core';
 
 import {ModalComponent} from './modal/modal.component';
 import { GoogleMaps } from '@ionic-native/google-maps/ngx';
-
 
 const routes: Routes = [
     {
@@ -28,11 +26,7 @@ const routes: Routes = [
         FormsModule,
         IonicModule,
         RouterModule.forChild(routes),
-        SharedModule,
-        AgmCoreModule.forRoot({
-            apiKey: 'YOUR API KEY',
-            libraries: ['places'],
-        }),
+        SharedModule
     ],
     declarations: [
         MapPage,

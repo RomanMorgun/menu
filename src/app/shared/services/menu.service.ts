@@ -48,7 +48,7 @@ export class MenuService {
     this.menu = menu;
   }
 
-  changeNavPos(posNumber: number) {
+  changeNavPos(posNumber) {
     console.log(posNumber);
     this.navigationNumber.emit(posNumber);
   }

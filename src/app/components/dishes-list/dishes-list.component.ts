@@ -3,8 +3,6 @@ import { Dish } from '../../shared/models/dish.model';
 import { MenuService } from '../../shared/services/menu.service';
 import { CartService } from '../../shared/services/cart.service';
 import { ActivatedRoute } from '@angular/router';
-import { SharedModule } from '../../shared/shared.module';
-
 
 @Component({
   selector: 'app-dishes-list',

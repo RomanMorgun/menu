@@ -14,13 +14,11 @@ const routes: Routes = [
     {path: 'home', loadChildren: './pages/home/home.module#HomePageModule'},
     {path: 'basket', loadChildren: './pages/basket/basket.module#BasketPageModule'},
     {path: 'map', loadChildren: './pages/map/map.module#MapPageModule'},
-
-
 ];
 
 @NgModule({
     imports: [
-        RouterModule.forRoot(routes, {preloadingStrategy: PreloadAllModules})
+        RouterModule.forRoot(routes, { useHash: true })
     ],
     exports: [RouterModule]
 })

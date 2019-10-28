@@ -49,7 +49,6 @@ export class MenuPage implements OnInit, OnDestroy {
     // this.menuService.changeNavPos(0);
     // console.log(this.currentDishes);
     this.subscribeToNavChange();
-
   }
 
   subscribeToNavChange() {
@@ -102,7 +101,6 @@ export class MenuPage implements OnInit, OnDestroy {
     this.categories = this.catService.setCategories(this.menu.categories);
   }
 
-
   setCurrentDishes(dishes: Dish[]) {
     this.currentDishes = dishes;
   }
@@ -141,6 +139,8 @@ export class MenuPage implements OnInit, OnDestroy {
   }
 
   async slideChanged(ev) {
+    let currentIndex = this.slides.getActiveIndex();
+    this.menuService.changeNavPos(+currentIndex);
     this.updateSlide().then((re1) => {
       console.log(re1);
       this.slides.length().then((res) => {
@@ -158,7 +158,7 @@ export class MenuPage implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.changeSlideEvent.unsubscribe();
+    if(this.changeSlideEvent && this.changeSlideEvent.unsubscribe) this.changeSlideEvent.unsubscribe();
   }
 
 }

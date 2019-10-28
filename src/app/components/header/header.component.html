@@ -26,13 +26,11 @@
             <ion-segment
                     #segment
                     scrollable
-                    (ionChange)="onSegmentChange($event)"
-            >
+                    (ionChange)="onSegmentChange($event)">
                 <ion-segment-button
                         *ngFor="let cat of categories; let i = index"
                         [value]="i"
-                        [checked]="i == segmentNum"
-                >
+                        [checked]="i == segmentNum">
                     <ion-label>{{cat.name}}</ion-label>
                 </ion-segment-button>
             </ion-segment>

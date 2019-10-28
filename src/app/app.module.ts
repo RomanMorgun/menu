@@ -27,7 +27,8 @@ import { ChooseActionPage } from './pages/choose-action/choose-action.page';
 import {MarkerCafeComponent} from './pages/map/marker-cafe/marker-cafe.component';
 
 @NgModule({
-    declarations: [AppComponent,
+    declarations: [
+        AppComponent,
         BasketPage,
         ScanQrPage,
         MenuPage,
@@ -40,9 +41,8 @@ import {MarkerCafeComponent} from './pages/map/marker-cafe/marker-cafe.component
         IonicModule.forRoot(),
         AppRoutingModule,
         HttpClientModule,
-        SharedModule,
+        SharedModule.forRoot()
     ],
-
     providers: [
         StatusBar,
         SplashScreen,
@@ -51,7 +51,9 @@ import {MarkerCafeComponent} from './pages/map/marker-cafe/marker-cafe.component
         Geolocation,
         BarcodeScanner
     ],
-
+    exports: [
+        SharedModule
+    ],
     bootstrap: [AppComponent]
 })
 export class AppModule {}

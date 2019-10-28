@@ -1,4 +1,3 @@
-/// <reference types="@types/googlemaps" />
 import {Component, NgZone, OnInit, ViewChild, ElementRef, OnDestroy} from '@angular/core';
 import {
   GoogleMaps,
@@ -16,9 +15,7 @@ import {
 } from '../../animations/customAlertEnter';
 import {ModalComponent} from './modal/modal.component';
 import {Router} from '@angular/router';
-import {MapsAPILoader} from '@agm/core';
 import {GeolocationService} from '../../shared/services/geolocation.service';
-
 
 declare let google: any;
 
@@ -106,7 +103,7 @@ export class MapPage implements OnInit, OnDestroy {
       this.autoComplete.getPlacePredictions({input: inputValue}, (predications, status) => {
         this.autocompleteItems = [];
         // this.ngZone.run(() => {
-        predications.forEach((pred) => {
+        Array.isArray(predications) && predications.forEach((pred) => {
           this.autocompleteItems.push(pred);
         });
       }, (err) => {
@@ -228,7 +225,7 @@ export class MapPage implements OnInit, OnDestroy {
 
   displayMarkers(markers): void {
     // take every marker options in array
-    markers.forEach((markerOptions) => {
+    Array.isArray(markers) &&  markers.forEach((markerOptions) => {
       // and create google marker
       const curMarker: Marker = this.map.addMarkerSync(markerOptions);
       this.markers.push(curMarker);
